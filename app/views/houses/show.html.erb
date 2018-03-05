@@ -314,31 +314,15 @@
 <div id='showings'>
   <h4>Showings:</h4>
   <% @showings.each do |showing| %>
-  <p><%= showing.day %> <%= showing.when %></p>
+  <p><%= showing.day.strftime('%B %d, %Y') %> <%= showing.when.strftime('%I:%M %P') %></p>
   <% end %>
   <form action='/showings/<%= @house.id %>' method='POST'>
     <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
-    <input type='hidden' name='_method' value='PATCH'>
     <input type='date' name='showing[day]'>
     <input type='time' name='showing[when]'>
     <input type='submit' value='Add'>
   </form>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <h2>Phase <%= @house.phase %> Task List:</h2>
 <% @house.tasklist.tasks.each do |task| %>

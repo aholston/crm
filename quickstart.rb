@@ -5,11 +5,11 @@ require 'googleauth/stores/file_token_store'
 require 'fileutils'
 
 OOB_URI = 'urn:ietf:wg:oauth:2.0:oob'
-APPLICATION_NAME = 'Google Calendar API Ruby Quickstart'
+APPLICATION_NAME = 'Google Calendar API'
 CLIENT_SECRETS_PATH = 'client_secret.json'
 CREDENTIALS_PATH = File.join(Dir.home, '.credentials',
-                             "calendar-ruby-quickstart.yaml")
-SCOPE = Google::Apis::CalendarV3::AUTH_CALENDAR_READONLY
+                             "calendar-api.yaml")
+SCOPE = 'https://www.googleapis.com/auth/calendar'
 
 ##
 # Ensure valid credentials, either by restoring from the saved credentials
