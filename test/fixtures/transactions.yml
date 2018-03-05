@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  house: one
+  client: one
+  sale: 1.5
+  commission: 1.5
+
+two:
+  house: two
+  client: two
+  sale: 1.5
+  commission: 1.5

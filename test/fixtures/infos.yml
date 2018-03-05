@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  infolist: one
+  name: MyString
+  year: 1
+  kind: MyString
+  primary_school: MyString
+  high_school: MyString
+  attractions: MyString
+  businesses: MyString
+  photographer: 2018-03-04
+
+two:
+  infolist: two
+  name: MyString
+  year: 1
+  kind: MyString
+  primary_school: MyString
+  high_school: MyString
+  attractions: MyString
+  businesses: MyString
+  photographer: 2018-03-04

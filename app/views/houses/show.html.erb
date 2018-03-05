@@ -1,0 +1,346 @@
+<%= render 'partials/navigation' %>
+<div class='basic'>
+  <h4>Address</h4>
+  <p><%= @house.address %></p>
+
+  <h4>Rooms</h4>
+  <p><%= @house.rooms %></p>
+
+  <h4>Bathrooms</h4>
+  <p><%= @house.bathrooms %></p>
+
+  <h4>Square Feet</h4>
+  <p><%= @house.sqft %></p>
+
+  <h4>Status</h4>
+  <p><%= @house.status %></p>
+
+  <h4>Description</h4>
+  <p><%= @house.description %></p>
+
+  <h4>Price</h4>
+  <p><%= number_to_currency(@house.price) %></p>
+
+  <h4>Client</h4>
+  <p>
+    <a href='/clients/<%= @house.client.id %>'><%= @house.client.first_name %> <%= @house.client.last_name %></a>
+  </p>
+
+  <h4>Commission</h4>
+  <p><%= number_to_currency(@house.commission) %></p>
+</div>
+<div='house_info'>
+
+<% @infolist.each do |list| %>
+  <% if list.name == 'Roofing' %>
+
+    <div id='roof'>
+    <h4>Información sobre el techo</h4>
+    <p>
+      Año: <%= list.year %>
+      <form action='/infos/<%= list.id %>' method='POST'>
+        <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+        <input type='hidden' name='_method' value='PATCH'>
+        <input type='text' name='info[year]' placeholder='Año' value='<%= list.year %>'>
+        <input type='submit' value='Update'>
+      </form>
+    </p>
+    <p>
+      Tipo: <%= list.kind %>
+      <form action='/infos/<%= list.id %>' method='POST'>
+        <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+        <input type='hidden' name='_method' value='PATCH'>
+        <input type='text' name='info[kind]' placeholder='Tipo' value='<%= list.kind %>'>
+        <input type='submit' value='Update'>
+      </form>
+    </p>
+    </div>
+
+  <% elsif list.name == 'Foundation' %>
+
+
+    <div id='foundation'>
+    <h4>Información sobre la fundación:</h4>
+    <p>
+      Año: <%= list.year %>
+      <form action='/infos/<%= list.id %>' method='POST'>
+        <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+        <input type='hidden' name='_method' value='PATCH'>
+        <input type='text' name='info[year]' placeholder='Año' value='<%= list.year %>'>
+        <input type='submit' value='Update'>
+      </form>
+    </p>
+    <p>
+      Tipo: <%= list.kind %>
+      <form action='/infos/<%= list.id %>' method='POST'>
+        <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+        <input type='hidden' name='_method' value='PATCH'>
+        <input type='text' name='info[kind]' placeholder='Tipo' value='<%= list.kind %>'>
+        <input type='submit' value='Update'>
+      </form>
+    </p>
+    </div>
+
+  <% elsif list.name == 'Stove' %>
+
+
+<div id='stove'>
+<h4>Información sobre estufa:</h4>
+<p>
+  Año: <%= list.year %>
+  <form action='/infos/<%= list.id %>' method='POST'>
+    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+    <input type='hidden' name='_method' value='PATCH'>
+    <input type='text' name='info[year]' placeholder='Año' value='<%= list.year %>'>
+    <input type='submit' value='Update'>
+  </form>
+</p>
+<p>
+  Tipo: <%= list.kind %>
+  <form action='/infos/<%= list.id %>' method='POST'>
+    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+    <input type='hidden' name='_method' value='PATCH'>
+    <input type='text' name='info[kind]' placeholder='Tipo' value='<%= list.kind %>'>
+    <input type='submit' value='Update'>
+  </form>
+</p>
+</div>
+
+<% elsif list.name == 'HVAC' %>
+
+
+    <div id='air'>
+    <h4>Información sobre aire:</h4>
+    <p>
+      Año: <%= list.year %>
+      <form action='/infos/<%= list.id %>' method='POST'>
+        <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+        <input type='hidden' name='_method' value='PATCH'>
+        <input type='text' name='info[year]' placeholder='Año' value='<%= list.year %>'>
+        <input type='submit' value='Update'>
+      </form>
+    </p>
+    <p>
+      Tipo: <%= list.kind %>
+      <form action='/infos/<%= list.id %>' method='POST'>
+        <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+        <input type='hidden' name='_method' value='PATCH'>
+        <input type='text' name='info[kind]' placeholder='Tipo' value='<%= list.kind %>'>
+        <input type='submit' value='Update'>
+      </form>
+    </p>
+    </div>
+
+  <% elsif list.name == 'Remodeling' %>
+
+
+    <div id='remodel'>
+      <h4>Remodelaciones a la casa:</h4>
+      <p>
+        Año: <%= list.year %>
+        <form action='/infos/<%= list.id %>' method='POST'>
+          <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+          <input type='hidden' name='_method' value='PATCH'>
+          <input type='text' name='info[year]' placeholder='Año' value='<%= list.year %>'>
+          <input type='submit' value='Update'>
+        </form>
+      </p>
+      <p>
+        Tipo: <%= list.kind %>
+        <form action='/infos/<%= list.id %>' method='POST'>
+          <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+          <input type='hidden' name='_method' value='PATCH'>
+          <input type='text' name='info[kind]' placeholder='Tipo' value='<%= list.kind %>'>
+          <input type='submit' value='Update'>
+        </form>
+      </p>
+    </div>
+
+    <% elsif list.name == 'Fireplace' %>
+
+    <div id='chimney'>
+      <h4>Información sobre la chimenea:</h4>
+      <p>
+        Año: <%= list.year %>
+        <form action='/infos/<%= list.id %>' method='POST'>
+          <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+          <input type='hidden' name='_method' value='PATCH'>
+          <input type='text' name='info[year]' placeholder='Año' value='<%= list.year %>'>
+          <input type='submit' value='Update'>
+        </form>
+      </p>
+      <p>
+        Tipo: <%= list.kind %>
+        <form action='/infos/<%= list.id %>' method='POST'>
+          <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+          <input type='hidden' name='_method' value='PATCH'>
+          <input type='text' name='info[kind]' placeholder='Tipo' value='<%= list.kind %>'>
+          <input type='submit' value='Update'>
+        </form>
+      </p>
+    </div>
+
+  <% elsif list.name == 'Key' %>
+
+
+    <div id='key'>
+      <h4>Copia de la llave:<h4>
+        <p><%= list.kind %></p>
+        <form action='/infos/<%= list.id %>' method='POST'>
+          <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+          <input type='hidden' name='_method' value='PATCH'>
+          <select name='info[kind]'>
+            <option value='Si'>Si</option>
+            <option value='No'>No</option>
+          <input type='submit' value='Update'>
+        </form>
+      </div>
+
+  <% elsif list.name == 'Septic' %>
+
+
+
+    <div id='septic'>
+      <h4>Tiene Septic?</h4>
+    <p>
+      <%= list.kind %>
+      <form action='/infos/<%= list.id %>' method='POST'>
+        <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+        <input type='hidden' name='_method' value='PATCH'>
+        <select name='info[kind]'>
+          <option value='Si'>Si</option>
+          <option value='No'>No</option>
+        <input type='submit' value='Update'>
+      </form>
+    </p>
+  </div>
+
+  <% elsif list.name == 'Utilities' %>
+
+
+    <div id='utilities'>
+    <p>
+      <h4>Estan prendidas todas las utilidades para la inspección?</h4>
+      <%= list.kind %>
+      <form action='/infos/<%= list.id %>' method='POST'>
+        <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+        <input type='hidden' name='_method' value='PATCH'>
+        <select name='info[kind]'>
+          <option value='Si'>Si</option>
+          <option value='No'>No</option>
+        <input type='submit' value='Update'>
+      </form>
+    </p>
+  </div>
+
+  <% elsif list.name == 'Schools' %>
+
+
+    <div id='schools'>
+
+      <h4>Escuelas?</h4>
+      <p>Primaria: <%= list.primary_school %></p>
+      <form action='/infos/<%= list.id %>' method='POST'>
+        <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+        <input type='hidden' name='_method' value='PATCH'>
+        <input type='text' name='info[primary_school]' value='<%= list.primary_school %>'>
+        <input type='submit' value='Update'>
+      </form>
+
+      <p>Secundaria: <%= list.high_school %></p>
+      <form action='/infos/<%= list.id %>' method='POST'>
+        <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+        <input type='hidden' name='_method' value='PATCH'>
+        <input type='text' name='info[high_school]' value='<%= list.high_school %>'>
+        <input type='submit' value='Update'>
+      </form>
+
+      <p>Prepa: <%= list.prepa %></p>
+      <form action='/infos/<%= list.id %>' method='POST'>
+        <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+        <input type='hidden' name='_method' value='PATCH'>
+        <input type='text' name='info[prepa]' value='<%= list.prepa %>'>
+        <input type='submit' value='Update'>
+      </form>
+    </div>
+
+  <% elsif list.name == 'Photographer' %>
+
+
+  <div id='photographer'>
+    <h4>Cuando puede venir el fotógrafo </h4>
+    <p><%= list.photographer %></p>
+    <form action='/infos/<%= list.id %>' method='POST'>
+      <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+      <input type='hidden' name='_method' value='PATCH'>
+      <input type='date' name='info[photographer]'>
+      <input type='submit' value='Add'>
+    </form>
+  </div>
+
+  <% end %>
+<% end %>
+
+
+<div id='attractions'>
+  <h4>Atracciones/Negocios</h4>
+  <% @house.attractions.each do |attraction| %>
+  <p><%= attraction.name %></p>
+  <% end %>
+  <form action='/attractions/<%= @house.id %>' method='POST'>
+    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+    <input type='text' name='attraction[name]'>
+    <input type='submit' value='Add'>
+  </form>
+
+
+
+<div id='other_comments'>
+  <h4>Otros comentarios que quieren que ponga la agente?</h4>
+  <% @housecomments.each do |comment| %>
+    <p><%= comment.description %></p>
+  <% end %>
+  <form action='/comments/<%= @house.id %>' method='POST'>
+    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+    <input type='hidden' name='comment[topic]' value=0>
+    <textarea name='comment[description]'></textarea>
+    <input type='submit' value='Add'>
+  </form>
+</div>
+
+
+
+
+<div id='showings'>
+  <h4>Showings:</h4>
+  <% @showings.each do |showing| %>
+  <p><%= showing.day %> <%= showing.when %></p>
+  <% end %>
+  <form action='/showings/<%= @house.id %>' method='POST'>
+    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+    <input type='hidden' name='_method' value='PATCH'>
+    <input type='date' name='showing[day]'>
+    <input type='time' name='showing[when]'>
+    <input type='submit' value='Add'>
+  </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Phase <%= @house.phase %> Task List:</h2>
+<% @house.tasklist.tasks.each do |task| %>
+<p><%= task.task %> <a href='/tasks/<%= task.id %>' data-method='DELETE'>Check off!</a></p>
+<% end %>

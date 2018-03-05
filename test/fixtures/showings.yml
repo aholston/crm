@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  house: one
+  day: 2018-03-04
+  when: 2018-03-04 20:50:26
+
+two:
+  house: two
+  day: 2018-03-04
+  when: 2018-03-04 20:50:26

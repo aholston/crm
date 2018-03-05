@@ -1,0 +1,5 @@
+<%= render 'partials/navigation' %>
+
+<a href='/users/new'>Create User</a> <a href="/users/<%= @user.id %>" data-method='PATCH'>Edit Profile</a>
+
+<h2><%= @user.first_name %> <%= @user.last_name %></h2>

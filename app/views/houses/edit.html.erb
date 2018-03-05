@@ -1,0 +1,55 @@
+<form action='/houses/<%= @house.id %>' method='POST'>
+  <input type='hidden' name='_method' value='PATCH'>
+  <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+
+  <label for='house[address]'>Address:</label>
+  <input type='text' value='<%= @house.address %>' name='house[address]' placeholder='<%= @house.address %>'>
+
+  <label for='house[rooms]'>Rooms</label>
+  <select name='house[rooms]' value='<%= @house.rooms %>'>
+    <option value='1'>1</option>
+    <option value='2'>2</option>
+    <option value='3'>3</option>
+    <option value='4'>4</option>
+    <option value='5'>5</option>
+    <option value='6'>6</option>
+    <option value='7'>7</option>
+    <option value='8'>8</option>
+    <option value='9'>9</option>
+    <option value='10'>10</option>
+  </select>
+
+  <label for='house[bathrooms]'>Bathrooms</label>
+  <select name='house[bathrooms]' value='<%= @house.bathrooms %>'>
+    <option value='1'>1</option>
+    <option value='2'>2</option>
+    <option value='3'>3</option>
+    <option value='4'>4</option>
+    <option value='5'>5</option>
+    <option value='6'>6</option>
+    <option value='7'>7</option>
+    <option value='8'>8</option>
+    <option value='9'>9</option>
+    <option value='10'>10</option>
+  </select>
+
+  <label for='house[sqft]'>Square Feet</label>
+  <input type='text' value='<%= @house.sqft %>' name='house[sqft]'>
+
+  <label for='house[description]'>Description</label>
+  <textarea name='house[description]' value='<%= @house.description %>'></textarea>
+
+  <label for='house[price]'>Price</label>
+  <input type='text' name='house[price]' value='<%= @house.price %>'>
+
+  <label for='house[client_id]'>Client</label>
+  <% @clients.each do |client| %>
+  <select name='house[client_id]' value='<%= @house.client.id %>'>
+    <option value='<%= client.id %>'>
+      <%= client.first_name %> <%= client.last_name %>
+    </option>
+  </select>
+  <% end %>
+
+  <input type='submit' value='Submit'>
+</form>

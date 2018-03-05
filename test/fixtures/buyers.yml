@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  financer: MyString
+  cash: 1.5
+  purchase_type: MyString
+  cio: MyString
+  client: one
+
+two:
+  financer: MyString
+  cash: 1.5
+  purchase_type: MyString
+  cio: MyString
+  client: two

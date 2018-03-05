@@ -1,0 +1,23 @@
+<%= render 'partials/navigation' %>
+
+<h3>Vendors</h3>
+<table>
+  <tr>
+    <th>Company</th>
+    <th>Services</th>
+    <th>Phone</th>
+    <th>Source</th>
+    <th>Action</th>
+  </tr>
+<% @vendors.each do |vendor| %>
+  <tr>
+    <td><a href='<%= vendor.website %>'><%= vendor.company %></a></td>
+    <td><%= vendor.service %></td>
+    <td><%= vendor.phone %></td>
+    <td><%= vendor.source %></td>
+    <td>
+      <a href='/vendors/<%= vendor.id %>/edit'>Edit</a>
+      <a href='/vendors/<%= vendor.id %>'  data-method='DELETE'>Delete</a>
+    </td>
+<% end %>
+</table>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  profit_margin: MyString
+  sales_price: MyString
+  client: one
+
+two:
+  profit_margin: MyString
+  sales_price: MyString
+  client: two
