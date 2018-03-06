@@ -59,3 +59,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'carrierwave'
 gem 'bootstrap-sass'
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
+gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
+gem 'bootstrap', '~> 4.0.0'
+gem 'autoprefixer-rails'

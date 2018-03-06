@@ -3,9 +3,7 @@ Rails.application.routes.draw do
 
 
 
-  get 'showings/create'
 
-  get 'comments/create'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :sessions, only: [:index, :create, :edit]
@@ -13,6 +11,7 @@ Rails.application.routes.draw do
   resources :clients
   resources :houses
   resources :vendors
+  resources :events
 
   root    'sessions#index'
   get     'logout'            =>          'sessions#destroy'
@@ -25,6 +24,7 @@ Rails.application.routes.draw do
   post    'attractions/:id'   =>          'attractions#create'
   post    'comments/:id'      =>          'comments#create'
   post    'showings/:id'      =>          'showings#create'
+  get     'events/:id/:g_id'   =>          'events#show'
 
 
 end
