@@ -8,21 +8,23 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action='/events' method='POST'>
+        <form action='/events/<%= @eventID %>' method='POST'>
           <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
 
-          <label for='event[name]'>Name</label>
-          <input type='text' name='event[name]'>
+          <label for='event[summary]'>Name</label>
+          <input type='text' name='event[summary]'><br>
 
           <label for='event[description]'>Description</label>
-          <input type='text' name='event[description]'>
+          <input type='text' name='event[description]'><br>
+
+          <label for='event[location]'>Location</label>
+          <input type='text' name='event[location]'><br>
 
           <input type='submit'>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

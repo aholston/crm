@@ -6,10 +6,10 @@ require 'fileutils'
 
 OOB_URI = 'urn:ietf:wg:oauth:2.0:oob'
 APPLICATION_NAME = 'Google Calendar API'
-CLIENT_SECRETS_PATH = 'client_secret.json'
+CLIENT_SECRETS_PATH = 'client_secret4.json'
 CREDENTIALS_PATH = File.join(Dir.home, '.credentials',
-                             "calendar-api.yaml")
-SCOPE = 'https://www.googleapis.com/auth/calendar'
+                             "calendar-ruby-quickstart.yaml")
+SCOPE = Google::Apis::CalendarV3::AUTH_CALENDAR_READONLY
 
 ##
 # Ensure valid credentials, either by restoring from the saved credentials

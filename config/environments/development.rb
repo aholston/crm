@@ -54,4 +54,7 @@ Rails.application.configure do
   config.log_level = :warn
   config.reload_classes_only_on_change = false
 
+  ENV['GOOGLE_CLIENT_ID']         = Rails.application.secrets.GOOGLE_CLIENT_ID
+  ENV['GOOGLE_SECRET_KEY']        = Rails.application.secrets.GOOGLE_SECRET_KEY
+
 end

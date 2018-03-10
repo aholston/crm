@@ -75,16 +75,15 @@ $(document).ready(function() {
 
   eventClick: function(event, element) {
     element.preventDefault();
-    source = event.source.googleCalendarId.split("@");
-    source = source[0]
-    console.log(source)
-    eventId = event.id;
+    // source = event.source.googleCalendarId.split("@");
+    // source = source[0]
+    // console.log(source)
 
 
 
-    $.getScript(`/events/${eventId}/${source}`, function(response) {
-      console.log(response)
-    });
+
+
+
   }
 
 
