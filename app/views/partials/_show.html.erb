@@ -1,6 +1,4 @@
-<% puts 'source' %>
-<% puts @source %>
-<% puts 'source' %>
+
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -12,16 +10,30 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="/events/<%= @eventID %>" method='POST'>
+        <form action='/events/<%= session[:event] %>' method='POST'>
           <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
           <input type='hidden' name='_method' value='PATCH'>
 
-
           <label for='summary'>Name</label>
-          <input type='text' name='summary'>
+          <input type='text' name='summary'><br>
 
-          <input type='submit'>
+          <label for='description'>Description</label>
+          <input type='text' name='description'><br>
+
+          <label for='start_time'>Time</label>
+          <input type='time' name='start_time'>
+
+
+          <input type='hidden' name='calendar_id' value='<%= session[:gID] %>'>'
+
+          <input type='submit' value='Update'>
         </form>
+        <form action='/events/<%= session[:event] %>' method='POST'>
+          <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+          <input type='hidden' name='_method' value='DELETE'>
+          <input type='submit' value='Delete'>
+        </form>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

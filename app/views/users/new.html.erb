@@ -1,18 +1,25 @@
-<%= render 'partials/navigation' %>
 
-<p>Please be aware that creating a new User allows them access to your database, your data, and any other information you have stored within this application. Only give access to people you trust and legally have the right to!</p>
+<div class="alert alert-danger">
+  <p>Please be aware that creating a new User allows them access to your database, your data, and any other information you have stored within this application. Only give access to people you trust and legally have the right to!</p>
+</div>
 
 <form action='/users' method='POST'>
   <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
 
-  <label for='user[username]'>Username</label>
-  <input type='text' name='user[username]'>
+  <div class='form-group'>
+    <label for='user[username]'>Username</label>
+    <input type='text' name='user[username]'>
+  </div>
 
-  <label for='user[password]'>Password</label>
-  <input type='password' name='user[password]'>
+  <div class='form-group'>
+    <label for='user[password]'>Password</label>
+    <input type='password' name='user[password]'>
+  </div>
 
-  <label for='user[password_confirmation]'>Password</label>
-  <input type='password' name='user[password_confirmation]'>
+  <div class='form-group'>
+    <label for='user[password_confirmation]'>Password Confirmation</label>
+    <input type='password' name='user[password_confirmation]'>
+  </div>
 
   <input type='submit' value='Submit'>
 

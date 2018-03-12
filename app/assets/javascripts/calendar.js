@@ -1,7 +1,4 @@
-$(document).ready(function() {
-
-  // page is now ready, initialize the calendar...
-
+function makeCal() {
   $('#calendar').fullCalendar({
     // put your options and callbacks here
     googleCalendarApiKey: 'AIzaSyCfZySfNEXpxhXo9YCnRaPVOB0PyqEvv5Q',
@@ -27,70 +24,42 @@ $(document).ready(function() {
      },
      {
        googleCalendarId: 'jd8satd21hthlnsdp50rl3c2k4@group.calendar.google.com'
-     }
+     },
+     {
+       googleCalendarId: 'gh5u69dlkdv6gu72391n3hhb7o@group.calendar.google.com',
+       color: 'orange'
+     },
 
    ],
 
     height: 650,
     selectable: true,
+    selectHelper: true,
     editable: true,
     header: {
       left:   'title',
       center: '',
-      right:  'today prev,next'
+      right:  'today prev,next, agendaWeek, month'
     },
 
-
-    events: [
-    {
-      title  : 'event1',
-      start  : '2010-01-01'
-    },
-    {
-      title  : 'event2',
-      start  : '2010-01-05',
-      end    : '2010-01-07'
-    },
-    {
-      title  : 'event3',
-      start  : '2018-03-03T12:30:00',
-      allDay : false // will make the time show
-    }
-  ],
-
-  // eventClick: function(event, element) {
-  //
-  //   event.title = "CLICKED!";
-  //
-  //   $('#calendar').fullCalendar('updateEvent', event);
-  //
-  // },
 
   select: function(start, end) {
     $.getScript('/events/new', function() {
-      console.log('working');
-
+      $('#start_time').val(moment(start).format("YYYY-MM-DD"));
+      $('#end_time').val(moment(end).format("YYYY-MM-DD"));
     })
   },
 
   eventClick: function(event, element) {
     element.preventDefault();
-    // source = event.source.googleCalendarId.split("@");
-    // source = source[0]
-    // console.log(source)
-
-
-
-
-
-
+    var id = event.id;
+    var gID = event.source.googleCalendarId.split('@');
+    gID = gID[0]
+    $.getScript('/events/'+id+'/'+gID, function() {
+    })
   }
 
 
 })
 
-
-
-
-
-});
+}

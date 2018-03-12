@@ -1,9 +1,21 @@
-<ul>
-  <li><a href='<%= root_path %>'>Dashboard</a></li>
-  <li><a href='/clients'>Clients</a></li>
-  <li><a href='/houses'>Listings</a></li>
-  <li><a href='/'>Transactions</a></li>
-  <li><a href='/vendors'>Vendors</a></li>
-  <li><a href='/'>Forms</a></li>
-  <li><a href='/'>Tutorial</a></li>
-</ul>
+<nav class="navbar-default">
+  <div class="container-fluid">
+
+    <a class="navbar-brand" href="<%= root_path %>">NRico</a>
+
+    <ul class="nav navbar-nav">
+      <li><a href='<%= root_path %>'>Dashboard</a></li>
+      <li><a href='/clients'>Clients</a></li>
+      <li><a href='/houses'>Listings</a></li>
+      <li><a href='/'>Transactions</a></li>
+      <li><a href='/vendors'>Vendors</a></li>
+      <li><a href='/'>Forms</a></li>
+      <li><a href='/'>Tutorial</a></li>
+    </ul>
+
+    <ul class='nav navbar-nav navbar-right'>
+      <li><a href="/sessions/<%= session[:user_id] %>/edit">Profile</a></li>
+      <li><a href='/logout'>Log Out</a></li>
+    </ul>
+  </div>
+</div>

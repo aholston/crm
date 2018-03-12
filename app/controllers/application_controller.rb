@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def user_val
-    params.require(:user).permit(:username, :password)
+    params.require(:user).permit(:username, :password, :first_name, :last_name, :email)
   end
 
   def client_val

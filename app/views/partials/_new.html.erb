@@ -8,17 +8,22 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action='/events/<%= @eventID %>' method='POST'>
+        <form action='/events/' method='POST'>
           <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
 
-          <label for='event[summary]'>Name</label>
-          <input type='text' name='event[summary]'><br>
+          <label for='summary'>Name</label>
+          <input type='text' name='summary'><br>
 
-          <label for='event[description]'>Description</label>
-          <input type='text' name='event[description]'><br>
+          <label for='description'>Description</label>
+          <input type='text' name='description'><br>
 
-          <label for='event[location]'>Location</label>
-          <input type='text' name='event[location]'><br>
+
+          <input type='hidden' name='start_time' id='start_time'>
+          <input type='hidden' name='end_time' id='end_time'>
+
+
+
+          <input type='hidden' name='calendar_id' value='gh5u69dlkdv6gu72391n3hhb7o@group.calendar.google.com'>
 
           <input type='submit'>
         </form>

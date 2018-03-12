@@ -23,7 +23,6 @@ class HousesController < ApplicationController
     @infolist = @house.infolist.infos
     count = 0
     @infolist.each do |list|
-      puts list.name
       count = count +1
     end
     @housecomments = Comment.where("topic = '0'")

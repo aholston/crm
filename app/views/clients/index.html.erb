@@ -1,89 +1,106 @@
-<%= render 'partials/navigation' %>
+
 
 <h2>Your Clients</h2>
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Address</th>
-    <th>Email</th>
-    <th>Phone</th>
-    <th>Birthday</th>
-    <th>Type</th>
-    <th>Status</th>
-    <th>CIO</th>
-    <th>Upload File</th>
-  <tr>
-<% @clients.each do |client| %>
-  <tr>
-    <td><a href='/clients/<%= client.id %>'><%= client.first_name %> <%= client.last_name %></td>
-    <td>
-      <% client.houses.each do |house| %>
-      <a href='/houses/<%= house.id %>'>
-        <%= house.address %>
-      </a>
-      <% end %>
-    </td>
-    <td><%= client.email %></td>
-    <td><%= client.phone %></td>
-    <td><%= client.birthday %></td>
-  <% if client.buyer %>
-    <td>Buyer</td>
-  <% elsif client.investor %>
-    <td>Investor</td>
-  <% else %>
-    <td>Seller</td>
+<div class='table-responsive'>
+  <table class='table'>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Birthday</th>
+      <th>Type</th>
+      <th>Status</th>
+      <th>CIO</th>
+      <th>Upload File</th>
+    <tr>
+  <% @clients.each do |client| %>
+    <tr>
+      <td><a href='/clients/<%= client.id %>'><%= client.first_name %> <%= client.last_name %></td>
+      <td>
+        <% client.houses.each do |house| %>
+        <a href='/houses/<%= house.id %>'>
+          <%= house.address %>
+        </a>
+        <% end %>
+      </td>
+      <td><%= client.email %></td>
+      <td><%= client.phone %></td>
+      <td><%= client.birthday %></td>
+    <% if client.buyer %>
+      <td>Buyer</td>
+    <% elsif client.investor %>
+      <td>Investor</td>
+    <% else %>
+      <td>Seller</td>
+    <% end %>
+      <td><%= client.listing %></td>
+      <td><%= client.cio %></td>
+      <td>
+        <form action='/contracts/<%= client.id %>' method='POST' enctype='multipart/form-data'>
+          <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+          <input type='file' name='contract[attachment]'>
+          <input type='submit'>
+        </form>
+      </td>
+    </tr>
   <% end %>
-    <td><%= client.listing %></td>
-    <td><%= client.cio %></td>
-    <td>
-      <form action='/contracts/<%= client.id %>' method='POST' enctype='multipart/form-data'>
-        <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
-        <input type='file' name='contract[attachment]'>
-        <input type='submit'>
-      </form>
-    </td>
-  </tr>
-<% end %>
-</table>
+  </table>
+</div>
 
 <h3>Add A Client</h3>
 
 <form action='/clients' method='POST'>
   <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+  <div class='form-group'>
+    <label for='client[first_name]'>First Name:</label>
+    <input type='text' name='client[first_name]'>
+  </div>
 
-  <label for='client[first_name]'>First Name:</label>
-  <input type='text' name='client[first_name]'>
+  <div class='form-group'>
+    <label for='last_name'>Last Name:</label>
+    <input type='text' name='client[last_name]'>
+  </div>
 
-  <label for='last_name'>Last Name:</label>
-  <input type='text' name='client[last_name]'>
+  <div class='form-group'>
+    <label for='client[email]'>Email:</label>
+    <input type='email' name='client[email]'>
+  </div>
 
-  <label for='client[email]'>Email:</label>
-  <input type='email' name='client[email]'>
+  <div class='form-group'>
+    <label for='client[phone]'>Phone:</label>
+    <input type='text' name='client[phone]' placeholder='555-555-5555'>
+  </div>
 
-  <label for='client[phone]'>Phone:</label>
-  <input type='text' name='client[phone]' placeholder='555-555-5555'>
+  <div class='form-group'>
+    <label for='client[birthday]'>Birthday:</label>
+    <input type='date' name='client[birthday]'>
+  </div>
 
-  <label for='client[birthday]'>Birthday:</label>
-  <input type='date' name='client[birthday]'>
+  <div class='form-group'>
+    <label for='client[listing]'>Type:</label>
+    <select name='client[listing]'>
+      <option value='active'>Active</option>
+      <option value='active'>Pending</option>
+      <option value='active'>Closed</option>
+      <option value='active'>Closed</option>
+    </select>
+  </div>
 
-  <label for='client[listing]'>Type:</label>
-  <select name='client[listing]'>
-    <option value='active'>Active</option>
-    <option value='active'>Pending</option>
-    <option value='active'>Closed</option>
-    <option value='active'>Closed</option>
-  </select>
+  <div class='form-group'>
+    <label for='client[cio]'>CIO</label>
+    <input type='text' name='client[cio]'>
+  </div>
 
-  <label for='client[cio]'>CIO</label>
-  <input type='text' name='client[cio]'>
-
-  <label for='client[level]'>Level</label>
-  <select name='client[level]'>
-    <option value='A'>A</option>
-    <option value='B'>B</option>
-    <option value='C'>C</option>
-    <option value='D'>D</option>
-  </select>
+  <div class='form-group'>
+    <label for='client[level]'>Level</label>
+    <select name='client[level]'>
+      <option value='A'>A</option>
+      <option value='B'>B</option>
+      <option value='C'>C</option>
+      <option value='D'>D</option>
+    </select>
+  </div>
 
 
   <input type='submit'>

@@ -24,11 +24,10 @@ Rails.application.routes.draw do
   post    'attractions/:id'   =>          'attractions#create'
   post    'comments/:id'      =>          'comments#create'
   post    'showings/:id'      =>          'showings#create'
-  get     'events/:id'        =>          'events#show'
+  get     'events/:id/:gID'        =>          'events#show'
 
-  post 'testing' => 'events#update'
-  get 'auth/google_oauth2/callback', to: 'events#update'
-  get 'auth/failure', to: redirect('/dashboard')
+  get '/redirect', to: 'events#redirect', as: 'redirect'
+  get '/oauth2callback', to: 'events#callback', as: 'callback'
 
 
 

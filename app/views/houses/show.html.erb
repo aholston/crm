@@ -1,4 +1,4 @@
-<%= render 'partials/navigation' %>
+
 <div class='basic'>
   <h4>Address</h4>
   <p><%= @house.address %></p>
@@ -284,9 +284,12 @@
 
 <div id='attractions'>
   <h4>Atracciones/Negocios</h4>
-  <% @house.attractions.each do |attraction| %>
-  <p><%= attraction.name %></p>
+  <% if @house.attractions %>
+    <% @house.attractions.each do |attraction| %>
+    <p><%= attraction.name %></p>
+    <% end %>
   <% end %>
+
   <form action='/attractions/<%= @house.id %>' method='POST'>
     <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
     <input type='text' name='attraction[name]'>
@@ -326,5 +329,5 @@
 
 <h2>Phase <%= @house.phase %> Task List:</h2>
 <% @house.tasklist.tasks.each do |task| %>
-<p><%= task.task %> <a href='/tasks/<%= task.id %>' data-method='DELETE'>Check off!</a></p>
+<p><%= task.task %> <a href='/tasks/<%= task.id %>' class='task_check' data-method='DELETE'>Check off!</a></p>
 <% end %>
