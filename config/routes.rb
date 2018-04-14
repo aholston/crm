@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   resources :houses
   resources :vendors
   resources :events
+  resources :agents
+  resources :transactions, only: [:index]
+  resources :password_resets
 
   root    'sessions#index'
   get     'logout'            =>          'sessions#destroy'
@@ -24,7 +27,17 @@ Rails.application.routes.draw do
   post    'attractions/:id'   =>          'attractions#create'
   post    'comments/:id'      =>          'comments#create'
   post    'showings/:id'      =>          'showings#create'
-  get     'events/:id/:g_id'   =>          'events#show'
+  get     'events/:id/:gID'   =>          'events#show'
+  get     'new_client/:id'    =>          'events#new_client'
+  get     'events/phase'      =>          'events#phase'
+  post    'clients/category'  =>          'clients#category'
+  post    'password_resets/:id' =>        'password_resets#update'
+
+
+  get '/redirect', to: 'events#redirect', as: 'redirect'
+  get '/oauth2callback', to: 'events#callback', as: 'callback'
+
+
 
 
 end

@@ -2,10 +2,18 @@ class ContactsController < ApplicationController
   before_action :authenticate
 
   def create
-    client = Client.find(params[:id])
     contact = Contact.new(contact_val)
-    contact.client = client
-    contact.save
-    redirect_to "/clients/#{client.id}"
+    if !params[:agent]
+      client = Client.find(params[:id])
+      contact.client = client
+      contact.save
+      return redirect_to "/clients/#{client.id}"
+    else
+      agent = Agent.find(params[:id])
+      contact.agent = agent
+      contact.save
+      return redirect_to "/agents/#{agent.id}"
+    end
+
   end
 end

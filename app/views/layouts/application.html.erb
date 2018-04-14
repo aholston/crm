@@ -5,15 +5,28 @@
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+
   </head>
 
   <body>
-    <%= render 'partials/flash_messages' %>
+  <div class='container-fluid'>
+    <% if flash[:errors] %>
+      <%= render 'partials/flash_messages' %>
+    <% end %>
+    <% if flash[:notice] %>
+      <div class='bg-success'>
+        <p><%= flash[:notice] %></p>
+      </div>
+    <% end %>
     <% if session[:user_id] %>
-      <a href="/sessions/<%= session[:user_id] %>/edit">Profile</a>
-      <a href='/logout'>Log Out</a>
+      <%= render 'partials/navigation' %>
     <% end %>
 
+
+
     <%= yield %>
-  </body>
+  </div>
+
+  
 </html>

@@ -1,23 +1,87 @@
-<%= render 'partials/navigation' %>
+<form action='/vendors' method='POST' class="form-inline">
+  <input type='hidden' name='_method' value='GET'>
+  <span class='h2'>Vendors </span>
+  <input type="search" class="form-control mb-2 mr-sm-2 mb-sm-0" name='search' id="search" placeholder="Search by Company">
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 
-<h3>Vendors</h3>
-<table>
-  <tr>
-    <th>Company</th>
-    <th>Services</th>
-    <th>Phone</th>
-    <th>Source</th>
-    <th>Action</th>
-  </tr>
-<% @vendors.each do |vendor| %>
-  <tr>
-    <td><a href='<%= vendor.website %>'><%= vendor.company %></a></td>
-    <td><%= vendor.service %></td>
-    <td><%= vendor.phone %></td>
-    <td><%= vendor.source %></td>
-    <td>
-      <a href='/vendors/<%= vendor.id %>/edit'>Edit</a>
-      <a href='/vendors/<%= vendor.id %>'  data-method='DELETE'>Delete</a>
-    </td>
-<% end %>
-</table>
+  <%= paginate @vendors %>
+  <div class='table-responsive'>
+    <table class='table table-hover table-bordered'>
+      <tr>
+        <th>Company</th>
+        <th>Services</th>
+        <th>Website</th>
+        <th>Phone</th>
+        <th>Source</th>
+        <th>Rating</th>
+        <th>Notes</th>
+        <th>Action</th>
+      </tr>
+    <% @vendors.each do |vendor| %>
+      <tr>
+        <td><%= vendor.company %></a></td>
+        <td><%= vendor.service %></td>
+        <td><a href='http://<%= vendor.website %>'><%= vendor.website %></a></td>
+        <td><%= vendor.phone %></td>
+        <td><%= vendor.source %></td>
+        <td><%= vendor.rating %></td>
+        <td><%= vendor.notes %></td>
+          <td>
+            <a href='/vendors/<%= vendor.id %>/edit' class='text-info'><button class='btn-primary'>Edit</button></a>
+            <a href='/vendors/<%= vendor.id %>' data-method='DELETE'><button class='btn-danger'>Delete</button></a>
+          </td>
+    <% end %>
+    </table>
+  </div>
+
+  <a href='/vendors'><button class='btn-primary'>All Vendors</button></a>
+
+  <div class='container'>
+    <h3 class='text-center'>Add A Vendor</h3>
+    <form action='/vendors' method='POST'>
+      <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+      <div class='form-group'>
+        <label for='vendor[company]'>Company:</label>
+        <input type='text' class='form-control' name='vendor[company]'>
+      </div>
+
+      <div class='form-group'>
+        <label for='vendor[services]'>Services:</label>
+        <input type='text' class='form-control' name='vendor[service]'>
+      </div>
+
+      <div class='form-group'>
+        <label for='vendor[website]'>Website:</label>
+        <input type='text' class='form-control' name='vendor[website]'>
+      </div>
+
+      <div class='form-group'>
+        <label for='vendor[phone]'>Phone:</label>
+        <input type='text' class='form-control' name='vendor[phone]'>
+      </div>
+
+      <div class='form-group'>
+        <label for='vendor[source]'>Source:</label>
+        <input type='text' class='form-control' name='vendor[source]'>
+      </div>
+
+      <div class='form-group'>
+        <label for='vendor[rating]'>Rating:</label>
+          <select name='vendor[rating]' >
+            <option value=1>1</option>
+            <option value=2>2</option>
+            <option value=3>3</option>
+            <option value=4>4</option>
+            <option value=5>5</option>
+          </select>
+      </div>
+
+      <div class='form-group'>
+        <label for='vendor[notes]'>Notes:</label>
+        <input type='text' class='form-control' name='vendor[notes]'>
+      </div>
+
+      <input class='form-control btn-primary' type='submit'>
+    </form>
+  </div>

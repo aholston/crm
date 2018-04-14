@@ -1,31 +1,44 @@
-<% puts 'source' %>
-<% puts @source %>
-<% puts 'source' %>
+<% puts params %>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add an Event</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit an Event</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form action="https://www.googleapis.com/calendar/v3/calendars/<%= @source %>/events/<%= @eventID %>" method='POST'>
+        <form action='/events/<%= session[:event] %>' method='POST'>
           <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
-          <input type='hidden' name='_data-method' value='PATCH'>
-
-
+          <input type='hidden' name='_method' value='PATCH'>
+        <div class='form-group'>
           <label for='summary'>Name</label>
-          <input type='text' name='summary'>
+          <input type='text' name='summary' class='form-control' value='<%= @event.summary %>'><br>
+        </div>
+        <div class='form-group'>
+          <label for='description'>Description</label>
+          <input type='text' name='description' class='form-control' value='<%= @event.description %>'><br>
+        </div>
+        <div class='form-group'>
+          <label for='start_time'>Time</label>
+          <input type='time' name='start_time' class='form-control' value='<%= @event.start %>'>
+        </div>
 
-          <input type='submit'>
+          <input type='hidden' name='calendar_id' value='<%= session[:gID] %>'>
+
+          <input type='submit' value='Update' class='btn-primary'>
+        </form><br><br>
+        <form action='/events/<%= session[:event] %>' method='POST'>
+          <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+          <input type='hidden' name='_method' value='DELETE'>
+          <input type='submit' value='Delete' class='btn-danger'>
         </form>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

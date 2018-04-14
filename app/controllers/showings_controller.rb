@@ -3,6 +3,6 @@ class ShowingsController < ApplicationController
     house = House.find(params[:id])
     showing = Showing.create(showings_val)
     showing.update(house: house)
-    redirect_back(fallback_location: '/houses')
+    redirect_to "houses/#{house.id}"
   end
 end

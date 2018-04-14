@@ -1,97 +1,51 @@
-$(document).ready(function() {
-
-  // page is now ready, initialize the calendar...
-
+function makeCal() {
   $('#calendar').fullCalendar({
     // put your options and callbacks here
     googleCalendarApiKey: 'AIzaSyCfZySfNEXpxhXo9YCnRaPVOB0PyqEvv5Q',
     eventSources: [
      {
-       googleCalendarId: 'q62u5ipid7kkjallu66mc0gb2k@group.calendar.google.com'
+       googleCalendarId: 'rsb5dm3du0g4u99ghf04m4dud4@group.calendar.google.com',
+       color: '#1c3440'
      },
-     {
-       googleCalendarId: 'k5kihqutjqb1i4v3fdp0tonrh8@group.calendar.google.com',
-       className: 'nice-event'
-     },
-     {
-       googleCalendarId: 'm23oi69q8rq7tc1iq3fivpusf8@group.calendar.google.com'
-     },
-     {
-       googleCalendarId: '23d43hdj0qhenfeb81hgf91cn8@group.calendar.google.com'
-     },
-     {
-       googleCalendarId: 'fgi2oho92nq2en5vaprsg272j8@group.calendar.google.com'
-     },
-     {
-       googleCalendarId: 'ttohg6d94hen89q3o6f2290oh4@group.calendar.google.com'
-     },
-     {
-       googleCalendarId: 'jd8satd21hthlnsdp50rl3c2k4@group.calendar.google.com'
-     }
 
    ],
 
     height: 650,
     selectable: true,
+    selectHelper: true,
     editable: true,
+    minTime: "07:00:00",
+    defaultView: 'agendaWeek',
+    eventLimit: true,
     header: {
       left:   'title',
       center: '',
-      right:  'today prev,next'
+      right:  'today prev,next, agendaWeek, month'
     },
 
-
-    events: [
-    {
-      title  : 'event1',
-      start  : '2010-01-01'
-    },
-    {
-      title  : 'event2',
-      start  : '2010-01-05',
-      end    : '2010-01-07'
-    },
-    {
-      title  : 'event3',
-      start  : '2018-03-03T12:30:00',
-      allDay : false // will make the time show
-    }
-  ],
-
-  // eventClick: function(event, element) {
-  //
-  //   event.title = "CLICKED!";
-  //
-  //   $('#calendar').fullCalendar('updateEvent', event);
-  //
-  // },
 
   select: function(start, end) {
     $.getScript('/events/new', function() {
-      console.log('working');
+      console.log(start);
+      $('#start_date').val(moment(start).format("YYYY-MM-DD HH:mm"));
+      $('#end_date').val(moment(end).format("YYYY-MM-DD HH:mm"));
+
+      console.log($('#start_date'))
+
 
     })
   },
 
   eventClick: function(event, element) {
     element.preventDefault();
-    source = event.source.googleCalendarId.split("@");
-    source = source[0]
-    console.log(source)
-    eventId = event.id;
-
-
-
-    $.getScript(`/events/${eventId}/${source}`, function(response) {
-      console.log(response)
-    });
+    var id = event.id;
+    var gID = event.source.googleCalendarId.split('@');
+    gID = gID[0]
+    $.getScript('/events/'+id+'/'+gID, function() {
+    })
   }
 
 
 })
 
-
-
-
-
-});
+}

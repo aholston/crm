@@ -1,0 +1,52 @@
+<div class='container'>
+  <h2>Edit Vendor</h2>
+  <form action='/vendors/<%= @vendor.id %>' method='POST'>
+    <input type='hidden' name='_method' value='PATCH'>
+    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+
+    <div class='form-group'>
+      <label for='vendor[address]'>Company:</label>
+      <input type='text' value='<%= @vendor.company %>' name='vendor[company]' placeholder='<%= @vendor.company %>' class='form-control'>
+    </div>
+
+
+    <div class='form-group'>
+      <label for='vendor[service]'>Services:</label>
+      <input type='text' value='<%= @vendor.service %>' name='vendor[service]' class='form-control'>
+    </div>
+
+    <div class='form-group'>
+      <label for='vendor[website]'>Website:</label>
+      <input type='text' name='vendor[website]' value='<%= @vendor.website %>' class='form-control'>
+    </div>
+
+    <div class='form-group'>
+      <label for='vendor[phone]'>Phone:</label>
+      <input type='text' name='vendor[phone]' value='<%= @vendor.phone %>' class='form-control'>
+    </div>
+
+    <div class='form-group'>
+      <label for='vendor[source]'>Source:</label>
+      <input type='text' name='vendor[source]' value='<%= @vendor.source %>' class='form-control'>
+    </div>
+
+    <div class='form-group'>
+      <label for='vendor[rating]'>Rating:</label>
+        <select name='vendor[rating]' >
+          <option value=1>1</option>
+          <option value=2>2</option>
+          <option value=3>3</option>
+          <option value=4>4</option>
+          <option value=5>5</option>
+        </select>
+    </div>
+
+    <div class='form-group'>
+      <label for='vendor[notes]'>Notes:</label>
+      <input type='text' class='form-control' name='vendor[notes]' value='<%= @vendor.notes %>'>
+    </div>
+
+
+    <input type='submit' value='Submit' class='form-control btn-primary'>
+  </form>
+</div>

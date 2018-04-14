@@ -1,0 +1,43 @@
+<div class='container'>
+  <% if @buyer %>
+  <h3 class='text-center'>Buyer Info</h3>
+  <form action='/clients/category' method='POST'>
+    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+    <input type='hidden' name='client' value='<%= @client.id %>'>
+    <div class='form-group'>
+      <label for='buyer[financer]'>Financer:</label>
+      <input type='text' class='form-control' name='buyer[financer]'>
+    </div>
+
+    <div class='form-group'>
+      <label for='last_name'>Cash:</label>
+      <input type='text' class='form-control' name='buyer[cash]'>
+    </div>
+
+    <div class='form-group'>
+      <label for='buyer[purchase_type]'>Purchase Type:</label>
+      <input type='text' class='form-control' name='buyer[purchase_type]'>
+    </div>
+
+    <input type='submit' value='Submit' class='form-control btn-primary'>
+  </form>
+
+  <% elsif @investor %>
+  <h3 class='text-center'>Investor Info</h3>
+  <form action='/clients/category' method='POST'>
+    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+    <input type='hidden' name='client' value='<%= @client.id %>'>
+    <div class='form-group'>
+      <label for='investor[profit_margin]'>Profit Margin:</label>
+      <input type='text' class='form-control' name='investor[profit_margin]'>
+    </div>
+
+    <div class='form-group'>
+      <label for='investor[sales_price]'>Sales Price:</label>
+      <input type='text' class='form-control' name='investor[sales_price]'>
+    </div>
+
+    <input type='submit' value='Submit' class='form-control btn-primary'>
+  </form>
+  <% end %>
+</div>

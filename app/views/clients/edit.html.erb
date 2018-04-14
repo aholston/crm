@@ -1,0 +1,91 @@
+<div class='container'>
+  <h3 class='text-center'>Edit <%= @client.first_name %> <%= @client.last_name %></h3>
+  <form action='/clients/<%= @client.id %>' method='POST'>
+    <input type='hidden' name='_method' value='PATCH'>
+    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+    <div class='form-group'>
+      <label for='client[first_name]'>First Name:</label>
+      <input type='text' class='form-control' name='client[first_name]' value='<%= @client.first_name %>'>
+    </div>
+
+    <div class='form-group'>
+      <label for='last_name'>Last Name:</label>
+      <input type='text' class='form-control' name='client[last_name]' value='<%= @client.last_name %>'>
+    </div>
+
+    <div class='form-group'>
+      <label for='client[email]'>Email:</label>
+      <input type='email' class='form-control' name='client[email]' value='<%= @client.email %>'>
+    </div>
+
+    <div class='form-group'>
+      <label for='client[phone]'>Phone:</label>
+      <input type='text' class='form-control' name='client[phone]' value='<%= @client.phone %>'>
+    </div>
+
+    <div class='form-group'>
+      <label for='client[birthday]'>Birthday:</label>
+      <input type='date' class='form-control' name='client[birthday]' value='<%= @client.birthday %>'>
+    </div>
+
+    <div class='form-group'>
+      <label for='client[listing]'>Type:</label>
+      <select name='client[listing]' class='form-control'>
+        <option value='<%= @client.listing %>'><%= @client.listing %></option>
+        <% if @client.listing != 'Active' %>
+        <option value='Active'>Active</option>
+        <% end %>
+        <% if @client.listing != 'Pending' %>
+        <option value='Pending'>Pending</option>
+        <% end %>
+        <% if @client.listing != 'Prospect' %>
+        <option value='Prospect'>Prospect</option>
+        <% end %>
+        <% if @client.listing != 'Dead' %>
+        <option value='Dead'>Dead</option>
+        <% end %>
+      </select>
+      </select>
+    </div>
+
+    <div class='form-group'>
+      <label for='client[cio]'>CIO</label>
+      <input class='form-control' type='text' name='client[cio]' value='<%= @client.cio %>'>
+    </div>
+
+    <% if @client.buyer %>
+      <div class='form-group'>
+          <div class='form-group'>
+            <label for='buyer[financer]'>Financer:</label>
+            <input type='text' class='form-control' name='buyer[financer]'>
+          </div>
+
+          <div class='form-group'>
+            <label for='last_name'>Cash:</label>
+            <input type='text' class='form-control' name='buyer[cash]'>
+          </div>
+
+          <div class='form-group'>
+            <label for='buyer[purchase_type]'>Purchase Type:</label>
+            <input type='text' class='form-control' name='buyer[purchase_type]'>
+          </div>
+
+
+        </div>
+      <% elsif @client.investor %>
+      <h3 class='text-center'>Investor Info</h3>
+        <div class='form-group'>
+          <label for='investor[profit_margin]'>Profit Margin:</label>
+          <input type='text' class='form-control' name='investor[profit_margin]'>
+        </div>
+
+        <div class='form-group'>
+          <label for='investor[sales_price]'>Sales Price:</label>
+          <input type='text' class='form-control' name='investor[sales_price]'>
+        </div>
+
+
+      <% end %>
+      <input class='form-control btn-primary' type='submit'>
+      </form>
+    </div>

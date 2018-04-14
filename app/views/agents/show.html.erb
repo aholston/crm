@@ -1,0 +1,109 @@
+<div class='container'>
+<div class='row'>
+<div class='col-md-8'>
+  <div class="list-group">
+    <div class="list-group-item list-group-item-action flex-column align-items-start active">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">Name</h5>
+      </div>
+      <p class="mb-1"><%= @agent.first_name %> <%= @agent.last_name %></p>
+    </div>
+    <div class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">House</h5>
+      </div>
+      <% if @agent.house %>
+        <p><a href='/houses/<%= @agent.house.id %>'><%= @agent.house.address %></a></p>
+      <% else %>
+        <p>No house</p>
+      <% end %>
+    </div>
+    <div class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">Email</h5>
+      </div>
+      <p><%= @agent.email %></p>
+    </div>
+    <div class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">Phone</h5>
+      </div>
+      <p><%= @agent.phone %></p>
+    </div>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class='container'>
+  <div class='row'>
+  <div class='col-md-8'>
+<h3>Recent Contacts</h3>
+<table class='table table-hover table-bordered'>
+  <tr>
+    <th>Date</th>
+    <th>Method</th>
+    <th>Description</th>
+    <th>Notes</th>
+  </tr>
+<% @agent.contacts.each do |contact| %>
+  <tr>
+    <td><%= contact.created_at.strftime('%B, %d, %Y') %></td>
+    <td><%= contact.method %></td>
+    <td><%= contact.description %></td>
+    <td><%= contact.notes %></td>
+  </tr>
+<% end %>
+</table>
+</div>
+
+
+<div class='col-md-4'>
+  <h3>Add Contact</h3>
+  <form action='/contacts/<%= @agent.id %>' method='POST'>
+    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+    <input type='hidden' name='agent' value='true'>
+    <div class='form-group'>
+      <label for='contact[method]'>Method</label>
+      <select name='contact[method]' class='form-control'>
+        <option value='phone'>Phone</option>
+        <option value='email'>Email</option>
+        <option value='text'>Text</option>
+        <option value='direct mail'>Direct Mail</option>
+        <option value='door'>Door Knock</option>
+      </select>
+    </div>
+
+    <div class='form-group'>
+      <label for='contact[description]'>Description</label>
+      <input type='text' name='contact[description]' class='form-control'>
+    </div>
+
+    <div class='form-group'>
+      <label for='contact[notes]'>Extra Notes</label>
+      <textarea name='contact[notes]' class='form-control'></textarea>
+    </div>
+
+    <input type='submit' value='Submit' class='btn-primary'>
+  </form>
+</div>
+</div>
+</div>
