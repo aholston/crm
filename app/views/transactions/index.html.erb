@@ -1,0 +1,189 @@
+
+  <ul class="nav nav-tabs" data-tabs="tabs">
+    <li class="active"><a data-toggle="tab" href="#0">Listing</a></li>
+    <li><a data-toggle="tab" href="#1">Phase 1</a></li>
+    <li><a data-toggle="tab" href="#2">Phase 2</a></li>
+    <li><a data-toggle="tab" href="#3">Phase 3</a></li>
+    <li><a data-toggle="tab" href="#4">Phase 4</a></li>
+    <li><a data-toggle="tab" href="#5">Phase 5</a></li>
+    <li><a data-toggle="tab" href="#6">Sold</a></li>
+
+
+  </ul>
+<div class="tab-content">
+    <div class="tab-pane active" id="0">
+      <div class='table-responsive'>
+        <table class='table table-hover table-bordered'>
+          <tr>
+            <th>Listing</th>
+            <th>Last Contact</th>
+          </tr>
+          <tr>
+          <% @listing.each do |house| %>
+              <% if house.client.contacts.last.nil? && house.client.first_name != 'None' %>
+                  <td class='bg-danger'><a href='/houses/<%= house.id %>'><%= house.address %></a></td>
+                  <td class='bg-danger'>No contact made with <a href='/clients/<%= house.client.id %>'><%= house.client.first_name %> <%= house.client.last_name %></a>!</td>
+              <% elsif house.client.first_name != 'None' && (@today - 7.days) > house.client.contacts.last.created_at  %>
+                <td class='bg-danger'><a href='/houses/<%= house.id %>'><%= house.address %></a></td>
+                <td class='bg-danger'><%= house.client.contacts.last.description %> on <%= house.client.contacts.last.created_at.strftime('%m/%d/%Y') %> Please contact <a href='/clients/<%= house.client.id %>'><%= house.client.first_name %> <%= house.client.last_name %></a>!</td>
+              <% elsif house.client.first_name != 'None'  %>
+                <td class='bg-success'><a href='/houses/<%= house.id %>'><%= house.address %></a></td>
+                <td class='bg-success'><%= house.client.contacts.last.description %> on <%= house.client.contacts.last.created_at.strftime('%m/%d/%Y') %></td>
+              <% else %>
+              <td><a href='/houses/<%= house.id %>'><%= house.address %></a></td>
+              <td class='bg-danger'>No client information</td>
+            <% end %>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+
+    <div class="tab-pane" id="1">
+      <div class='table-responsive'>
+        <table class='table table-hover table-bordered'>
+          <tr>
+            <th>Listing</th>
+            <th>Last Contact</th>
+          </tr>
+          <tr>
+          <% @phase1.each do |house| %>
+            <% if house.client.contacts.last.nil? %>
+              <td class='bg-danger'><a href='/houses/<%= house.id %>'><%= house.address %></a></td>
+              <td class='bg-danger'>No contact made with <a href='/clients/<%= house.client.id %>'><%= house.client.first_name %> <%= house.client.last_name %></a>!</td>
+
+          <% elsif (@today - 7.days) > house.client.contacts.last.created_at %>
+            <td class='bg-danger'><a href='/houses/<%= house.id %>'><%= house.address %></a></td>
+            <td class='bg-danger'><%= house.client.contacts.last.description %> on <%= house.client.contacts.last.created_at.strftime('%m/%d/%Y') %> Please contact <a href='/clients/<%= house.client.id %>'><%= house.client.first_name %> <%= house.client.last_name %></a>!</td>
+          <% else %>
+            <td class='bg-success'><a href='/houses/<%= house.id %>'><%= house.address %></a></td>
+            <td class='bg-success'><%= house.client.contacts.last.description %> on <%= house.client.contacts.last.created_at.strftime('%m/%d/%Y') %></td>
+        </tr>
+          <% end %>
+        <% end %>
+        </table>
+      </div>
+    </div>
+    <div class="tab-pane" id="2">
+      <div class='table-responsive'>
+        <table class='table table-hover table-bordered'>
+          <tr>
+            <th>Listing</th>
+            <th>Last Contact</th>
+          </tr>
+          <tr>
+          <% @phase2.each do |house| %>
+            <% if house.client.contacts.last.nil? %>
+              <td class='bg-danger'><a href='/houses/<%= house.id %>'><%= house.address %></a></td>
+              <td class='bg-danger'>No contact made with <a href='/clients/<%= house.client.id %>'><%= house.client.first_name %> <%= house.client.last_name %></a>!</td>
+            <% elsif (@today - 7.days) > house.client.contacts.last.created_at %>
+              <td class='bg-danger'><a href='/houses/<%= house.id %>'><%= house.address %></a></td>
+              <td class='bg-danger'><%= house.client.contacts.last.description %> on <%= house.client.contacts.last.created_at.strftime('%m/%d/%Y') %> Please contact <a href='/clients/<%= house.client.id %>'><%= house.client.first_name %> <%= house.client.last_name %></a>!</td>
+            <% else %>
+              <td class='bg-success'><a href='/houses/<%= house.id %>'><%= house.address %></a></td>
+              <td class='bg-success'><%= house.client.contacts.last.description %> on <%= house.client.contacts.last.created_at.strftime('%m/%d/%Y') %></td>
+            </tr>
+        <% end %>
+      <% end %>
+        </table>
+      </div>
+    </div>
+    <div class="tab-pane" id="3">
+      <div class='table-responsive'>
+        <table class='table table-hover table-bordered'>
+          <tr>
+            <th>Listing</th>
+            <th>Last Contact</th>
+          </tr>
+          <tr>
+          <% @phase3.each do |house| %>
+            <% if house.client.contacts.last.nil? %>
+              <td class='bg-danger'><a href='/houses/<%= house.id %>'><%= house.address %></a></td>
+              <td class='bg-danger'>No contact made with <a href='/clients/<%= house.client.id %>'><%= house.client.first_name %> <%= house.client.last_name %></a>!</td>
+            <% elsif (@today - 7.days) > house.client.contacts.last.created_at %>
+              <td class='bg-danger'><a href='/houses/<%= house.id %>'><%= house.address %></a></td>
+              <td class='bg-danger'><%= house.client.contacts.last.description %> on <%= house.client.contacts.last.created_at.strftime('%m/%d/%Y') %> Please contact <a href='/clients/<%= house.client.id %>'><%= house.client.first_name %> <%= house.client.last_name %></a>!</td>
+            <% else %>
+              <td class='bg-success'><a href='/houses/<%= house.id %>'><%= house.address %></a></td>
+              <td class='bg-success'><%= house.client.contacts.last.description %> on <%= house.client.contacts.last.created_at.strftime('%m/%d/%Y') %></td>
+            <% end %>
+        </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+    <div class="tab-pane" id="4">
+      <div class='table-responsive'>
+        <table class='table table-hover table-bordered'>
+          <tr>
+            <th>Listing</th>
+            <th>Last Contact</th>
+          </tr>
+          <tr>
+          <% @phase4.each do |house| %>
+            <% if house.client.contacts.last.nil? %>
+              <td class='bg-danger'><a href='/houses/<%= house.id %>'><%= house.address %></a></td>
+              <td class='bg-danger'>No contact made with <a href='/clients/<%= house.client.id %>'><%= house.client.first_name %> <%= house.client.last_name %></a>!</td>
+            <% elsif (@today - 7.days) > house.client.contacts.last.created_at %>
+              <td class='bg-danger'><a href='/houses/<%= house.id %>'><%= house.address %></a></td>
+              <td class='bg-danger'><%= house.client.contacts.last.description %> on <%= house.client.contacts.last.created_at.strftime('%m/%d/%Y') %> Please contact <a href='/clients/<%= house.client.id %>'><%= house.client.first_name %> <%= house.client.last_name %></a>!</td>
+            <% else %>
+              <td class='bg-success'><a href='/houses/<%= house.id %>'><%= house.address %></a></td>
+              <td class='bg-success'><%= house.client.contacts.last.description %> on <%= house.client.contacts.last.created_at.strftime('%m/%d/%Y') %></td>
+            <% end %>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+    <div class="tab-pane" id="5">
+      <div class='table-responsive'>
+        <table class='table table-hover table-bordered'>
+          <tr>
+            <th>Listing</th>
+            <th>Last Contact</th>
+          </tr>
+          <tr>
+          <% @phase5.each do |house| %>
+            <% if house.client.contacts.last.nil? %>
+              <td class='bg-danger'><a href='/houses/<%= house.id %>'><%= house.address %></a></td>
+              <td class='bg-danger'>No contact made with <a href='/clients/<%= house.client.id %>'><%= house.client.first_name %> <%= house.client.last_name %></a>!</td>
+
+            <% elsif (@today - 7.days) > house.client.contacts.last.created_at %>
+              <td class='bg-danger'><a href='/houses/<%= house.id %>'><%= house.address %></a></td>
+              <td class='bg-danger'><%= house.client.contacts.last.description %> on <%= house.client.contacts.last.created_at.strftime('%m/%d/%Y') %> Please contact <a href='/clients/<%= house.client.id %>'><%= house.client.first_name %> <%= house.client.last_name %></a>!</td>
+            <% else %>
+              <td class='bg-success'><a href='/houses/<%= house.id %>'><%= house.address %></a></td>
+              <td class='bg-success'><%= house.client.contacts.last.description %> on <%= house.client.contacts.last.created_at.strftime('%m/%d/%Y') %></td>
+            <% end %>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+    <div class="tab-pane" id="6">
+      <div class='table-responsive'>
+        <table class='table table-hover table-bordered'>
+          <tr>
+            <th>Listing</th>
+            <th>Commission</th>
+          </tr>
+          <tr>
+          <% @phase6.each do |house| %>
+            <td class='bg-success'><a href='/houses/<%= house.id %>'><%= house.address %></a></td>
+            <td class='bg-success'><%= house.commission %></a></td>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+
+
+<script>
+  $(function () {
+    $('#myTab li:first-child a').tab('show')
+  })
+</script>

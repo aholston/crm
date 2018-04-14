@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def index
+    
     redirect_to '/dashboard' unless !session[:user_id]
   end
 
@@ -14,6 +15,7 @@ class SessionsController < ApplicationController
       return redirect_to '/redirect'
     else
       flash[:errors] = 'Invalid Combination'
+      return redirect_to'/'
     end
   end
 

@@ -1,16 +1,55 @@
 
 
-<h1>Hello <%= @user.first_name %></h1>
 
 
-<h3>ToDo List</h3>
-<!-- ADD TODO LIST -->
+<div class='container'>
 
-<div id="calendar"></div>
-<div id='remote_control'>
-  <div id='event_adder'></div>
+
+
+<div class='row'>
+<div class='col-md-8'>
+  <div id="calendar"></div>
+</div>
+  <div id='remote_control'>
+    <div id='event_adder'></div>
+  </div>
+<div class='col-md-4 text-center'>
+    <h2>Quick Dashboard</h2>
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-success">Total Made To Date: <strong><%= @user.total_made %></strong></li>
+      <li class="list-group-item"><a href='https://mail.judgefite.com/a/index.php'>Email</a></li>
+      <li class="list-group-item"><a href='https://skyslope.com/'>Skyslope</a></li>
+      <li class="list-group-item"><a href='http://www.ntreis.net/'>MLS</a></li>
+      <li class="list-group-item"><a href='https://www.showings.com/'>CSS Showings</a></li>
+      <li class="list-group-item"><a href='https://www.zipformplus.com/'>ZipForms</a></li>
+      <li class="list-group-item"><a href='https://c21jf.us/team/login.php?return=%2Fteam%2Fhome.php'>C21 Dashboard</a></li>
+    </ul>
+    <h2>Alerts</h2>
+    <div class='pre-scrollable'>
+      <ul class="list-group alerts">
+        <% @clients.each do |client| %>
+          <li class="list-group-item list-group-item-success">Today is <a href='/clients/<%= client.id %>'><%= client.first_name %> <%= client.last_name %>'s</a> birthday</li>
+        <% end %>
+        <% @todays_events.each do |event| %>
+        <li class="list-group-item list-group-item-info">Scheduled: <%= event[:summary] %> at <%= event[:time].strftime('%I:%M') %></li>
+        <% end %>
+        <% @urgents.each do |client| %>
+          <% if client.contacts.empty? %>
+            <li class="list-group-item list-group-item-danger">You have not made contact with <a href='/clients/<%= client.id %>'><%= client.first_name %> <%= client.last_name %></a></li>
+          <% elsif client.contacts.last.created_at + 7.days < DateTime.now.to_date %>
+            <li class="list-group-item list-group-item-danger">You have not made contact with <a href='/clients/<%= client.id %>'><%= client.first_name %> <%= client.last_name %></a> in over a week!</li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+</div>
+</div>
 </div>
 
+
 <script>
-  makeCal();
+  $(document).ready(function() {
+    makeCal();
+  })
+
 </script>

@@ -1,7 +1,9 @@
 class AttractionsController < ApplicationController
   def create
-    info = Info.find(params[:id])
-    Attraction.create(attraction_val).merge(info: info)
+    house = House.find(params[:id])
+    attraction = Attraction.create(attraction_val)
+    attraction.update(house: house)
+    attraction.save
     redirect_back(fallback_location: '/houses')
   end
 

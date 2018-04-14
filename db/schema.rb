@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180310191027) do
+ActiveRecord::Schema.define(version: 20180414141014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,12 +28,15 @@ ActiveRecord::Schema.define(version: 20180310191027) do
     t.string "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "contact_id"
+    t.index ["contact_id"], name: "index_agents_on_contact_id"
   end
 
   create_table "attractions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "house_id"
+    t.string "name"
     t.index ["house_id"], name: "index_attractions_on_house_id"
   end
 
@@ -110,6 +113,8 @@ ActiveRecord::Schema.define(version: 20180310191027) do
     t.float "commission"
     t.string "info"
     t.integer "phase"
+    t.bigint "agent_id"
+    t.index ["agent_id"], name: "index_houses_on_agent_id"
     t.index ["client_id"], name: "index_houses_on_client_id"
   end
 
@@ -179,6 +184,15 @@ ActiveRecord::Schema.define(version: 20180310191027) do
     t.index ["tasklist_id"], name: "index_tasks_on_tasklist_id"
   end
 
+  create_table "tokens", force: :cascade do |t|
+    t.string "access_token"
+    t.integer "expires_in"
+    t.string "refresh_token"
+    t.string "token_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "transactions", force: :cascade do |t|
     t.bigint "house_id"
     t.bigint "client_id"
@@ -198,6 +212,11 @@ ActiveRecord::Schema.define(version: 20180310191027) do
     t.string "first_name"
     t.string "last_name"
     t.string "email"
+    t.string "password_reset_token"
+    t.datetime "password_reset_sent_at"
+    t.string "auth_token"
+    t.float "total_made", default: 0.0
+    t.string "refresh_token"
   end
 
   create_table "vendors", force: :cascade do |t|
@@ -209,14 +228,18 @@ ActiveRecord::Schema.define(version: 20180310191027) do
     t.datetime "updated_at", null: false
     t.string "image"
     t.string "website"
+    t.integer "rating", default: 1
+    t.string "notes"
   end
 
+  add_foreign_key "agents", "contacts"
   add_foreign_key "attractions", "houses"
   add_foreign_key "buyers", "clients"
   add_foreign_key "comments", "houses"
   add_foreign_key "contacts", "agents"
   add_foreign_key "contacts", "clients"
   add_foreign_key "contracts", "houses"
+  add_foreign_key "houses", "agents"
   add_foreign_key "houses", "clients"
   add_foreign_key "infolists", "houses"
   add_foreign_key "infos", "infolists"

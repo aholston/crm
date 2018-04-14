@@ -16,6 +16,14 @@ class ApplicationController < ActionController::Base
     params.require(:client).permit(:first_name, :last_name, :email, :phone, :birthday, :listing, :cio, :level)
   end
 
+  def buyer_val
+    params.require(:buyer).permit(:financer, :cash, :purchase_type, :listing)
+  end
+
+  def investor_val
+    params.require(:investor).permit(:profit_margin, :sales_price, :listing)
+  end
+
   def contact_val
     params.require(:contact).permit(:method, :description, :notes)
   end
@@ -28,12 +36,25 @@ class ApplicationController < ActionController::Base
     params.require(:contract).permit(:name, :attachment).merge(client_id: @client.id)
   end
 
+  def vendor_val
+    params.require(:vendor).permit(:company, :service, :phone, :source, :website, :rating, :notes)
+  end
+
+  def agent_val
+    params.require(:agent).permit(:first_name, :last_name, :email, :phone)
+  end
+
   def commission(num)
+    if num.nil?
+      return 0
+    end
     century = num * 0.03
     after = century - (century * 0.06)
-    total = after * 0.73
-    return total
+    total = (after * 0.80) - 33.00
+    return total.round(2)
   end
+
+  #
 
   def no_comma(value)
     value.gsub!(',','') if value.is_a?(String)
@@ -102,7 +123,6 @@ class ApplicationController < ActionController::Base
     Info.create(name: 'Septic', infolist: infolist)
     Info.create(name: 'Utilities', infolist: infolist)
     Info.create(name: 'Schools', infolist: infolist)
-    Info.create(name: 'Attractions', infolist: infolist)
     Info.create(name: 'Photographer', infolist: infolist)
   end
 

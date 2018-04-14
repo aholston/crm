@@ -10,22 +10,27 @@
       <div class="modal-body">
         <form action='/events/' method='POST'>
           <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
-
+        <div class='form-group'>
           <label for='summary'>Name</label>
-          <input type='text' name='summary'><br>
+          <input type='text' name='summary' class='form-control'><br>
+        </div>
 
+        <div class='form-group'>
           <label for='description'>Description</label>
-          <input type='text' name='description'><br>
+          <input type='text' name='description' class='form-control'><br>
+        </div>
 
+          <input type='hidden' name='start_date' id='start_date'>
+          <input type='hidden' name='end_date' id='end_date'>
 
           <input type='hidden' name='start_time' id='start_time'>
           <input type='hidden' name='end_time' id='end_time'>
 
 
 
-          <input type='hidden' name='calendar_id' value='gh5u69dlkdv6gu72391n3hhb7o@group.calendar.google.com'>
+          <input type='hidden' name='calendar_id' value='tcf1uk9h37avimj2k9qfvulhtc@group.calendar.google.com'>
 
-          <input type='submit'>
+          <input type='submit' class='btn-primary'>
         </form>
       </div>
       <div class="modal-footer">

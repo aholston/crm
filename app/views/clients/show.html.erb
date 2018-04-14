@@ -1,92 +1,133 @@
+<div class='container'>
+<div class='row'>
+<div class='col-md-8'>
+  <div class="list-group">
+    <div class="list-group-item list-group-item-action flex-column align-items-start active">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">Name</h5>
+      </div>
+      <p class="mb-1"><%= @client.first_name %> <%= @client.last_name %></p>
+    </div>
+    <div class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">Address</h5>
+      </div>
+      <% @client.houses.each do |house| %>
+        <p><a href='/houses/<%= house.id %>'><%= house.address %></a></p>
+      <% end %>
+    </div>
+    <div class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">Email</h5>
+      </div>
+      <p><%= @client.email %></p>
+    </div>
+    <div class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">Phone</h5>
+      </div>
+      <p><%= @client.phone %></p>
+    </div>
+    <div class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">Birthday</h5>
+      </div>
+      <% if !@client.birthday.nil? %>
+        <p><%= @client.birthday.strftime('%m/%d/%Y') %></p>
+      <% end %>
+    </div>
+    <div class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">Status</h5>
+      </div>
+      <p><%= @client.listing %></p>
+      <div>
+        <form action='/clients/<%= @client.id %>' method='POST'>
+          <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+          <input type='hidden' name='_method' value='PATCH'>
+          <input type='hidden' name='list_adjust' value='true'>
+          <select name='client[listing]' value='<%= @client.listing %>'>
+            <% if @client.listing.capitalize! != 'Active' %>
+            <option value='Active'>Active</option>
+            <% end %>
+            <% if @client.listing.capitalize! != 'Pending' %>
+            <option value='Pending'>Pending</option>
+            <% end %>
+            <% if @client.listing.capitalize! != 'Prospect' %>
+            <option value='Prospect'>Prospect</option>
+            <% end %>
+            <% if @client.listing.capitalize! != 'Dead' %>
+            <option value='Dead'>Dead</option>
+            <% end %>
+          </select>
+          <input type='submit' value='Change' class='btn-primary'>
+        </form>
+      </div>
+    </div>
+      <div class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">Type</h5>
+        </div>
+        <% if @client.buyer %>
+          <p>Buyer</p>
+          <p><strong>Financer:</strong> <%= @client.buyer.financer %></p>
+          <p><strong>Cash:</strong> <%= @client.buyer.cash %></p>
+          <p><strong>Purchase Type:</strong> <%= @client.buyer.purchase_type %></p>
+        <% elsif @client.investor %>
+          <p>Investor</p>
+          <p><strong>Profit Margin:</strong> <%= @client.investor.profit_margin %></p>
+          <p><strong>Sales Price:</strong> <%= @client.investor.sales_price %></p>
+        <% end %>
+      </div>
+  </div>
+</div>
+<div class='col-md-4'>
+    <h3>Alerts</h3>
+  <div class='pre-scrollable'>
+    <ul class="list-group alerts">
+      <% if @client.listing != 'Dead' %>
+      <% if @contacts.empty? %>
+        <li class="list-group-item list-group-item-danger">You have not made contact with <a href='/clients/<%= @client.id %>'><%= @client.first_name %> <%= @client.last_name %></a>.</li>
+      <% elsif @client.contacts.last.created_at + 7.days < DateTime.now.to_date %>
+          <li class="list-group-item list-group-item-danger">You have not made contact with <a href='/clients/<%= @client.id %>'><%= @client.first_name %> <%= @client.last_name %></a> in over a week!</li>
+      <% end %>
+      <% end %>
+      <% if !@client.birthday.nil? %>
+      <% if @client.birthday.strftime('%m %d') == Date.today.strftime('%m %d') %>
+        <li class="list-group-item list-group-item-success">Today is <a href='/clients/<%= @client.id %>'><%= @client.first_name %> <%= @client.last_name %>'s</a> birthday</li>
+      <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+</div>
 
 
-<h2><%= @client.first_name %> <%= @client.last_name %></h2>
-
-<h4>Address</h4>
-<% @client.houses.each do |house| %>
-<p><a href='/houses/<%= house.id %>'><%= house.address %></a></p>
-<% end %>
-
-<h4>Email Address:</h4>
-<p><%= @client.email %></p>
-
-<h4>Phone Number:</h4>
-<p><%= @client.phone %></p>
-
-<h4>Birthday:</h4>
-<% if !@client.birthday.nil? %>
-<p><%= @client.birthday.strftime('%m/%d/%Y') %></p>
-<% end %>
-
-<h4>Status:</h4>
-<p><%= @client.listing %></p>
-<form action='/clients/<%= @client.id %>' method='POST'>
-  <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
-  <input type='hidden' name='_method' value='PATCH'>
-  <select name='client[listing]' value='<%= @client.listing %>'>
-    <option value='Active'>Active</option>
-    <option value='Pending'>Pending</option>
-    <option value='Prospect'>Prospect</option>
-    <option value='Dead'>Dead</option>
-  </select>
-  <input type='submit' value='Change'>
-</form>
+</div>
 
 
 
 
-<% if @client.buyer %>
-<h4>Type</h4>
-<p>Buyer</h4>
-
-<h4>Financer:</h4>
-<p><%= @client.buyer.financer %></p>
-
-<h4>Cash</h4>
-<p><%= @client.buyer.cash %></p>
-
-<h4>Purchase Type:</h4>
-<p><%= @client.buyer.purchase_type %></p>
-
-<% elsif @client.investor %>
-<h4>Type</h4>
-<p>Investor</h4>
-
-<h4>Profit Margin</h4>
-<p><%= @client.investor.profit_margin %></p>
-
-<h4>Sales Price</h4>
-<p><%= @client.investor.sales_price %></p>
-
-<% else %>
-<h4>Type</h4>
-<p>Seller</p>
-<% end %>
 
 
-<h3>Add Contact</h3>
-<form action='/contacts/<%= @client.id %>' method='POST'>
-  <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
-  <label for='contact[method]'>Method</label>
-  <select name='contact[method]'>
-    <option value='phone'>Phone</option>
-    <option value='email'>Email</option>
-    <option value='text'>Text</option>
-    <option value='direct mail'>Direct Mail</option>
-    <option value='door'>Door Knock</option>
-  </select>
 
-  <label for='contact[description]'>Description</label>
-  <input type='text' name='contact[description]'>
 
-  <label for='contact[notes]'>Extra Notes</label>
-  <textarea name='contact[notes]'></textarea>
 
-  <input type='submit' value='Submit'>
-</form>
 
+
+
+
+
+
+
+
+
+<div class='container'>
+  <div class='row'>
+  <div class='col-md-8'>
 <h3>Recent Contacts</h3>
-<table>
+<table class='table table-hover table-bordered'>
   <tr>
     <th>Date</th>
     <th>Method</th>
@@ -102,7 +143,36 @@
   </tr>
 <% end %>
 </table>
+</div>
 
-<h3>Alerts</h3>
 
-<!-- ADD ALERTS -->
+<div class='col-md-4'>
+  <h3>Add Contact</h3>
+  <form action='/contacts/<%= @client.id %>' method='POST'>
+    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+    <div class='form-group'>
+      <label for='contact[method]'>Method</label>
+      <select name='contact[method]' class='form-control'>
+        <option value='phone'>Phone</option>
+        <option value='email'>Email</option>
+        <option value='text'>Text</option>
+        <option value='direct mail'>Direct Mail</option>
+        <option value='door'>Door Knock</option>
+      </select>
+    </div>
+
+    <div class='form-group'>
+      <label for='contact[description]'>Description</label>
+      <input type='text' name='contact[description]' class='form-control'>
+    </div>
+
+    <div class='form-group'>
+      <label for='contact[notes]'>Extra Notes</label>
+      <textarea name='contact[notes]' class='form-control'></textarea>
+    </div>
+
+    <input type='submit' value='Submit' class='btn-primary'>
+  </form>
+</div>
+</div>
+</div>

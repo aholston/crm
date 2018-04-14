@@ -1,6 +1,14 @@
-<h2>Your Listings</h2>
+<form action='/houses' method='POST' class="form-inline">
+  <input type='hidden' name='_method' value='GET'>
+  <span class='h2'>Your Listings </span>
+  <input type="search" class="form-control mb-2 mr-sm-2 mb-sm-0" name='search' id="search" placeholder="Search by Address">
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<%= paginate @houses %>
+
 <div class='table-responsive'>
-  <table class='table'>
+  <table class='table table-hover table-bordered'>
     <tr>
       <th>Address</th>
       <th>Rooms</th>
@@ -26,18 +34,29 @@
       <td><%= house.description %></td>
       <td><%= number_to_currency(house.price) %></td>
       <td><%= number_to_currency(house.commission) %></td>
+      <% if house.client.first_name == 'None' %>
+      <td class='bg-danger'>
+        No Client
+      </td>
+        <% else %>
       <td>
         <a href='/clients/<%= house.client.id %>'><%= house.client.first_name %> <%= house.client.last_name %>
       </td>
+        <% end %>
+
       <td>Phase: <%= house.phase %></td>
       <td>
-        <a href='/houses/<%= house.id %>' data-method='DELETE' >Delete</a>
-        <a href='/houses/<%= house.id %>/edit'>Edit</a>
+        <a href='/houses/<%= house.id %>/edit' class='text-info'><button class='btn-primary'>Edit</button></a>
+        <a href='/houses/<%= house.id %>' data-method='DELETE'><button class='btn-danger'>Delete</button></a>
+      </td>
     <% end %>
   </table>
+  <a href='/houses'><button class='btn-primary'>All Listings</button></a>
 </div>
+
+
 <div class='container'>
-  <h3>Add a Listing</h3>
+  <h3 class='text-center'>Add a Listing</h3>
   <form action='/houses' method='POST'>
     <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
     <div class='form-group'>
@@ -93,6 +112,8 @@
     <div class='form-group'>
       <label for='house[client_id]' class='control-label'>Client</label>
       <select name='house[client_id]' class='form-control'>
+        <option value=''></option>
+        <option value='dummy'>No client</option>
       <% @clients.each do |client| %>
         <option value='<%= client.id %>'>
           <%= client.first_name %> <%= client.last_name %>
@@ -101,6 +122,69 @@
       </select>
     </div>
 
-    <input type='submit' value='Submit'>
+
+
+
+    <div class="dropdown">
+      <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Click here to add a client
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+        <div class='form-group'>
+          <label for='client[first_name]'>First Name:</label>
+          <input type='text' class='form-control' name='client[first_name]'>
+        </div>
+
+        <div class='form-group'>
+          <label for='last_name'>Last Name:</label>
+          <input type='text' class='form-control' name='client[last_name]'>
+        </div>
+
+        <div class='form-group'>
+          <label for='client[email]'>Email:</label>
+          <input type='email' class='form-control' name='client[email]'>
+        </div>
+
+        <div class='form-group'>
+          <label for='client[phone]'>Phone:</label>
+          <input type='text' class='form-control' name='client[phone]' placeholder='555-555-5555'>
+        </div>
+
+        <div class='form-group'>
+          <label for='client[birthday]'>Birthday:</label>
+          <input type='date' class='form-control' name='client[birthday]'>
+        </div>
+
+        <div class='form-group'>
+          <label for='client[listing]'>Type:</label>
+          <select name='client[listing]' class='form-control'>
+            <option value='active'>Active</option>
+            <option value='active'>Pending</option>
+            <option value='active'>Closed</option>
+          </select>
+        </div>
+
+        <div class='form-group'>
+          <label for='client[cio]'>CIO</label>
+          <input class='form-control' type='text' name='client[cio]'>
+        </div>
+
+        <div class='form-group'>
+          <label for='client[level]'>Level</label>
+          <select class='form-control' name='client[level]'>
+            <option value='A'>A</option>
+            <option value='B'>B</option>
+            <option value='C'>C</option>
+            <option value='D'>D</option>
+          </select>
+      </div>
+    </div>
+  </div><br>
+
+
+    <input class='form-control btn-primary' type='submit' value='Submit'>
+  </div>
   </form>
+</div>
 </div>
