@@ -1,0 +1,15 @@
+current directory: /vagrant/natasha/natasha/vendor/bundle/ruby/2.5.0/gems/websocket-driver-0.6.5/ext/websocket-driver
+/home/vagrant/.rvm/rubies/ruby-2.5.0/bin/ruby -r ./siteconf20180415-12000-xs5s0j.rb extconf.rb
+creating Makefile
+
+current directory: /vagrant/natasha/natasha/vendor/bundle/ruby/2.5.0/gems/websocket-driver-0.6.5/ext/websocket-driver
+make "DESTDIR=" clean
+
+current directory: /vagrant/natasha/natasha/vendor/bundle/ruby/2.5.0/gems/websocket-driver-0.6.5/ext/websocket-driver
+make "DESTDIR="
+compiling websocket_mask.c
+linking shared-object websocket_mask.so
+
+current directory: /vagrant/natasha/natasha/vendor/bundle/ruby/2.5.0/gems/websocket-driver-0.6.5/ext/websocket-driver
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 websocket_mask.so ./.gem.20180415-12000-cpq5gi
