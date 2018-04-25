@@ -2,7 +2,18 @@
   <input type='hidden' name='_method' value='GET'>
   <span class='h2'>Your Clients </span>
   <input type="search" class="form-control mb-2 mr-sm-2 mb-sm-0" name='search' id="search" placeholder="Search by name">
-
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" name="sellers"  id="inlineCheckbox1" value="sellers">
+ <label class="form-check-label" for="inlineCheckbox1">Sellers</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" name="buyers"  id="inlineCheckbox2" value="buyers">
+  <label class="form-check-label" for="inlineCheckbox2">Buyers</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" name="investors"  id="inlineCheckbox3" value="investors">
+  <label class="form-check-label" for="inlineCheckbox3">Investors</label>
+</div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
@@ -10,7 +21,216 @@
 
 
 
+
 <%= paginate @clients %>
+<% if @sellers_only == true  %>
+
+<div class='table-responsive'>
+  <table class='table table-hover table-bordered'>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Birthday</th>
+      <th>Type</th>
+      <th>Status</th>
+      <th>CIO</th>
+      <th>Actions</th>
+    <tr>
+  <% @clients.each do |client| %>
+  <% if !client.buyer %> 
+    <% if !client.investor %>
+    <tr>
+      <td><a href='/clients/<%= client.id %>'><%= client.first_name %> <%= client.last_name %></td>
+      <td>
+        <% client.houses.each do |house| %>
+        <a href='/houses/<%= house.id %>'>
+          <%= house.address %>
+        </a>
+        <% end %>
+      </td>
+      <td><%= client.email %></td>
+      <td><%= client.phone %></td>
+      <td><%= client.birthday %></td>
+    <% if client.buyer %>
+      <td>Buyer</td>
+    <% elsif client.investor %>
+      <td>Investor</td>
+    <% else %>
+      <td>Seller</td>
+    <% end %>
+      <td>
+        <form action='/clients/<%= client.id %>' method='POST'>
+          <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+          <input type='hidden' name='_method' value='PATCH'>
+          <select name='client[listing]' >
+            <option value='<%= client.listing %>'><%= client.listing.capitalize %></option>
+            <% if client.listing.capitalize != 'Active' %>
+            <option value='Active'>Active</option>
+            <% end %>
+            <% if client.listing.capitalize != 'Pending' %>
+            <option value='Pending'>Pending</option>
+            <% end %>
+            <% if client.listing.capitalize != 'Prospect' %>
+            <option value='Prospect'>Prospect</option>
+            <% end %>
+            <% if client.listing.capitalize != 'Dead' %>
+            <option value='Dead'>Dead</option>
+            <% end %>
+          </select>
+          <input type='submit' value='Change' class='btn-secondary text-primary'>
+        </form>
+      </td>
+      <td><%= client.cio %></td>
+      <td>
+        <a href='/clients/<%= client.id %>/edit' class='text-info'><button class='btn-primary'>Edit</button></a>
+        <a href='/clients/<%= client.id %>' data-method='DELETE'><button class='btn-danger'>Delete</button></a>
+      </td>
+    </tr>
+      <% end %>
+    <% end %>
+  <% end %>
+  </table>
+</div>
+
+<% elsif @buyers_only == true  %>
+<div class='table-responsive'>
+  <table class='table table-hover table-bordered'>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Birthday</th>
+      <th>Type</th>
+      <th>Status</th>
+      <th>CIO</th>
+      <th>Actions</th>
+    <tr>
+  <% @clients.each do |client| %>
+  <% if client.buyer %> 
+    <tr>
+      <td><a href='/clients/<%= client.id %>'><%= client.first_name %> <%= client.last_name %></td>
+      <td>
+        <% client.houses.each do |house| %>
+        <a href='/houses/<%= house.id %>'>
+          <%= house.address %>
+        </a>
+        <% end %>
+      </td>
+      <td><%= client.email %></td>
+      <td><%= client.phone %></td>
+      <td><%= client.birthday %></td>
+    <% if client.buyer %>
+      <td>Buyer</td>
+    <% elsif client.investor %>
+      <td>Investor</td>
+    <% else %>
+      <td>Seller</td>
+    <% end %>
+      <td>
+        <form action='/clients/<%= client.id %>' method='POST'>
+          <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+          <input type='hidden' name='_method' value='PATCH'>
+          <select name='client[listing]' >
+            <option value='<%= client.listing %>'><%= client.listing.capitalize %></option>
+            <% if client.listing.capitalize != 'Active' %>
+            <option value='Active'>Active</option>
+            <% end %>
+            <% if client.listing.capitalize != 'Pending' %>
+            <option value='Pending'>Pending</option>
+            <% end %>
+            <% if client.listing.capitalize != 'Prospect' %>
+            <option value='Prospect'>Prospect</option>
+            <% end %>
+            <% if client.listing.capitalize != 'Dead' %>
+            <option value='Dead'>Dead</option>
+            <% end %>
+          </select>
+          <input type='submit' value='Change' class='btn-secondary text-primary'>
+        </form>
+      </td>
+      <td><%= client.cio %></td>
+      <td>
+        <a href='/clients/<%= client.id %>/edit' class='text-info'><button class='btn-primary'>Edit</button></a>
+        <a href='/clients/<%= client.id %>' data-method='DELETE'><button class='btn-danger'>Delete</button></a>
+      </td>
+    </tr>
+      <% end %>
+    <% end %>
+  </table>
+</div>
+
+<% elsif @investors_only == true  %>
+<div class='table-responsive'>
+  <table class='table table-hover table-bordered'>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Birthday</th>
+      <th>Type</th>
+      <th>Status</th>
+      <th>CIO</th>
+      <th>Actions</th>
+    <tr>
+  <% @clients.each do |client| %>
+  <% if client.investor %> 
+    <tr>
+      <td><a href='/clients/<%= client.id %>'><%= client.first_name %> <%= client.last_name %></td>
+      <td>
+        <% client.houses.each do |house| %>
+        <a href='/houses/<%= house.id %>'>
+          <%= house.address %>
+        </a>
+        <% end %>
+      </td>
+      <td><%= client.email %></td>
+      <td><%= client.phone %></td>
+      <td><%= client.birthday %></td>
+    <% if client.buyer %>
+      <td>Buyer</td>
+    <% elsif client.investor %>
+      <td>Investor</td>
+    <% else %>
+      <td>Seller</td>
+    <% end %>
+      <td>
+        <form action='/clients/<%= client.id %>' method='POST'>
+          <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+          <input type='hidden' name='_method' value='PATCH'>
+          <select name='client[listing]' >
+            <option value='<%= client.listing %>'><%= client.listing.capitalize %></option>
+            <% if client.listing.capitalize != 'Active' %>
+            <option value='Active'>Active</option>
+            <% end %>
+            <% if client.listing.capitalize != 'Pending' %>
+            <option value='Pending'>Pending</option>
+            <% end %>
+            <% if client.listing.capitalize != 'Prospect' %>
+            <option value='Prospect'>Prospect</option>
+            <% end %>
+            <% if client.listing.capitalize != 'Dead' %>
+            <option value='Dead'>Dead</option>
+            <% end %>
+          </select>
+          <input type='submit' value='Change' class='btn-secondary text-primary'>
+        </form>
+      </td>
+      <td><%= client.cio %></td>
+      <td>
+        <a href='/clients/<%= client.id %>/edit' class='text-info'><button class='btn-primary'>Edit</button></a>
+        <a href='/clients/<%= client.id %>' data-method='DELETE'><button class='btn-danger'>Delete</button></a>
+      </td>
+    </tr>
+      <% end %>
+    <% end %>
+  </table>
+</div>
+
+<% else %>
 <div class='table-responsive'>
   <table class='table table-hover table-bordered'>
     <tr>
@@ -75,7 +295,8 @@
   <% end %>
   </table>
 </div>
-<a href='/clients'><button class='btn-primary'>All Clients</button></a>
+<% end %>
+<a href='/clients'><button class='btn-primary'>All Clients</button></a>          
 
 
 

@@ -1,6 +1,6 @@
 class Client < ApplicationRecord
   has_many :houses , dependent: :destroy
-  has_many :contacts
+  has_many :contacts, dependent: :destroy
   has_one :buyer
   has_one :investor
   

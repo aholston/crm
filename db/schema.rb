@@ -104,7 +104,7 @@ ActiveRecord::Schema.define(version: 20180414141014) do
     t.integer "rooms"
     t.integer "bathrooms"
     t.float "sqft"
-    t.string "status"
+    t.string "listing"
     t.text "description"
     t.float "price"
     t.bigint "client_id"
@@ -148,15 +148,6 @@ ActiveRecord::Schema.define(version: 20180414141014) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_investors_on_client_id"
-  end
-
-  create_table "reccomendations", force: :cascade do |t|
-    t.bigint "vendor_id"
-    t.bigint "client_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["client_id"], name: "index_reccomendations_on_client_id"
-    t.index ["vendor_id"], name: "index_reccomendations_on_vendor_id"
   end
 
   create_table "showings", force: :cascade do |t|
@@ -244,8 +235,6 @@ ActiveRecord::Schema.define(version: 20180414141014) do
   add_foreign_key "infolists", "houses"
   add_foreign_key "infos", "infolists"
   add_foreign_key "investors", "clients"
-  add_foreign_key "reccomendations", "clients"
-  add_foreign_key "reccomendations", "vendors"
   add_foreign_key "showings", "houses"
   add_foreign_key "tasklists", "houses"
   add_foreign_key "tasks", "tasklists"

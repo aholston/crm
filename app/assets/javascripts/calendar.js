@@ -4,7 +4,7 @@ function makeCal() {
     googleCalendarApiKey: 'AIzaSyCfZySfNEXpxhXo9YCnRaPVOB0PyqEvv5Q',
     eventSources: [
      {
-       googleCalendarId: 'rsb5dm3du0g4u99ghf04m4dud4@group.calendar.google.com',
+       googleCalendarId: 'tcf1uk9h37avimj2k9qfvulhtc@group.calendar.google.com',
        color: '#1c3440'
      },
 

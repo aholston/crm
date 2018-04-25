@@ -2,9 +2,18 @@ class ClientsController < ApplicationController
   before_action :authenticate
 
   def index
-
+	@buyers_only = false 
+	@sellers_only = false 
+	@investors_only = false 
       @clients = Client.search(params[:search]).includes(:houses, :buyer, :investor).order(:first_name).where.not(first_name: 'None')
-    
+	
+	if params[:buyers]
+		@buyers_only = true 
+	elsif params[:sellers] 
+		@sellers_only = true
+	elsif params[:investors] 
+		@investors_only = true
+	end   
 
     # @clients = Client.includes(:houses, :buyer, :investor).order(:updated_at)
     @clients = @clients.page(params[:page]).per(15)

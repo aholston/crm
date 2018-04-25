@@ -1,0 +1,15 @@
+current directory: /var/www/crm/vendor/bundle/ruby/2.3.0/gems/websocket-driver-0.6.5/ext/websocket-driver
+/home/ubuntu/.rvm/rubies/ruby-2.3.1/bin/ruby -r ./siteconf20180416-979-1xwqo1h.rb extconf.rb
+creating Makefile
+
+current directory: /var/www/crm/vendor/bundle/ruby/2.3.0/gems/websocket-driver-0.6.5/ext/websocket-driver
+make "DESTDIR=" clean
+
+current directory: /var/www/crm/vendor/bundle/ruby/2.3.0/gems/websocket-driver-0.6.5/ext/websocket-driver
+make "DESTDIR="
+compiling websocket_mask.c
+linking shared-object websocket_mask.so
+
+current directory: /var/www/crm/vendor/bundle/ruby/2.3.0/gems/websocket-driver-0.6.5/ext/websocket-driver
+make "DESTDIR=" install
+/usr/bin/install -m 0755 websocket_mask.so ./.gem.20180416-979-w5o690
