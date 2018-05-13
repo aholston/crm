@@ -1,4 +1,4 @@
-This is a Customer Relationship Mapper similar to Podio built using Ruby on Rails, Javascript, OAuth2.o, Google API, and FullCalendar gem. I built this in 5 weeks. Certain files have been ommitted for privacy, so any clone will need to add their own Google API key as well as calendar ID.
+This is a Customer Relationship Mapper similar to Podio built using Ruby on Rails, Javascript, OAuth2.o, Google API, and FullCalendar gem. I built this in 5 weeks. Certain files have been ommitted for privacy, so any clone will need to add their own Google API key, calendar ID, and client ID. All client secrets should be put in the root folder in a file called ".env"
 
 
 Features include:
