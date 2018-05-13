@@ -142,7 +142,7 @@ class EventsController < ApplicationController
 
   def show
     session[:event] = params[:id]
-    session[:calendar_id] = 'tcf1uk9h37avimj2k9qfvulhtc@group.calendar.google.com'
+    session[:calendar_id] = 'XXXXX@group.calendar.google.com'
 
     client = Signet::OAuth2::Client.new(client_options)
     client.update!(session[:authorization])
@@ -203,14 +203,14 @@ class EventsController < ApplicationController
         authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
         token_credential_uri: 'https://accounts.google.com/o/oauth2/token',
         scope: Google::Apis::CalendarV3::AUTH_CALENDAR,
-        redirect_uri: 'http://www.natasharicor.com/oauth2callback',
+        redirect_uri: 'http://www.localhost3000/oauth2callback',
         prompt: 'consent',
         access_type: 'offline'
       }
     end
 
     def cal_id
-      id = 'tcf1uk9h37avimj2k9qfvulhtc@group.calendar.google.com'
+      id = 'XXXXX@group.calendar.google.com'
       return id
     end
 
