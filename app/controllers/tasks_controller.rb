@@ -17,7 +17,7 @@ class TasksController < ApplicationController
         house.update(phase: house.phase + 1)
         create_tasks(house.phase, tasklist)
         if house.phase == 4
-          return redirect_to "/events/phase/#{house.id}"
+          return redirect_to "phase/new/#{house.id}"
         end
       elsif house.phase == 5
         user = User.find(session[:user_id])

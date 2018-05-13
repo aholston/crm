@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   post    'showings/:id'      =>          'showings#create'
   get     'events/:id/:gID'   =>          'events#show'
   get     'new_client/:id'    =>          'events#new_client'
-  get     'events/phase'      =>          'events#phase'
+  get     'phase/new/:id'     =>          'events#phase'
   post    'clients/category'  =>          'clients#category'
   post    'password_resets/:id' =>        'password_resets#update'
 
