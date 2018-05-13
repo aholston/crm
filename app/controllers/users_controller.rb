@@ -89,14 +89,14 @@ class UsersController < ApplicationController
         authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
         token_credential_uri: 'https://accounts.google.com/o/oauth2/token',
         scope: Google::Apis::CalendarV3::AUTH_CALENDAR,
-        redirect_uri: 'http://www.natasharicor.com/oauth2callback',
+        redirect_uri: 'http://localhost:3000/oauth2callback',
         access_type: 'offline',
         prompt: 'consent'
       }
     end
 
     def cal_id
-      id = 'tcf1uk9h37avimj2k9qfvulhtc@group.calendar.google.com'
+      id = 'XXXXX@group.calendar.google.com'
       return id
     end
 end
