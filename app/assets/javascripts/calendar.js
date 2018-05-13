@@ -1,10 +1,10 @@
 function makeCal() {
   $('#calendar').fullCalendar({
     // put your options and callbacks here
-    googleCalendarApiKey: 'AIzaSyCfZySfNEXpxhXo9YCnRaPVOB0PyqEvv5Q',
+    googleCalendarApiKey: 'XXXXXXX',
     eventSources: [
      {
-       googleCalendarId: 'tcf1uk9h37avimj2k9qfvulhtc@group.calendar.google.com',
+       googleCalendarId: 'XXXXXXX@group.calendar.google.com',
        color: '#1c3440'
      },
 
